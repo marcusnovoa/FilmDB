@@ -1,0 +1,13 @@
+.Movie {
+  width: 20%;
+  display: flex;
+  justify-content: center; }
+  @media screen and (max-width: 1199px) {
+    .Movie {
+      width: 33.3%; } }
+  @media screen and (max-width: 768px) {
+    .Movie {
+      width: 50%; } }
+  @media screen and (max-width: 540px) {
+    .Movie {
+      width: 100%; } }
