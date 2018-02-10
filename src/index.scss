@@ -1,0 +1,16 @@
+// Variables
+$dark_primary: #111;
+$dark_secondary: #333;
+
+.grey.darken-3 {
+    background-color: $dark_secondary;
+}
+.grey-text.darken-3 {
+    color: $dark_secondary;
+}
+.grey.darken-4 {
+    background-color: $dark_primary;
+}
+.grey-text.darken-4 {
+    color: $dark_primary;
+}

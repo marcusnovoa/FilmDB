@@ -1,8 +1,6 @@
-.App {
-  text-align: center; }
-  .App header {
-    background-color: #222;
-    padding: 2rem;
-    color: white; }
-    .App header .header-title {
-      margin: 0; }
+@media screen and (min-width: 993px) {
+  .App .Navbar {
+    padding-left: 15px; } }
+
+.App .button-collapse {
+  cursor: pointer; }
