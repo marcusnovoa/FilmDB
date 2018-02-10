@@ -1,7 +1,8 @@
 .Movie {
   width: 20%;
   display: flex;
-  justify-content: center; }
+  justify-content: center;
+  margin: .5rem 0 1rem 0; }
   @media screen and (max-width: 1199px) {
     .Movie {
       width: 33.3%; } }

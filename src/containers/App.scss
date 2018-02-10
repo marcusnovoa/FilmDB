@@ -7,4 +7,9 @@
     .button-collapse {
         cursor: pointer;
     }
+    .card {
+        margin: 0;
+        box-shadow: 0 0 35px #000;
+        -webkit-box-shadow: 0 0 35px #000;
+    }
 }

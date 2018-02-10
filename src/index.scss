@@ -2,6 +2,11 @@
 $dark_primary: #111;
 $dark_secondary: #333;
 
+body {
+    margin: 0;
+    padding: 0;
+    background-color: #222;
+}
 .grey.darken-3 {
     background-color: $dark_secondary;
 }
@@ -14,3 +19,4 @@ $dark_secondary: #333;
 .grey-text.darken-4 {
     color: $dark_primary;
 }
+
