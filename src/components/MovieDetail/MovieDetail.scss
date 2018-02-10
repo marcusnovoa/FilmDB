@@ -1,18 +1,24 @@
 .MovieDetail {
     .card {
         margin: 0;
+        &.info {
+            margin: -5rem 0 0 2rem;
+            padding: 2rem;
+            width: 100%;
+        }
     }
     .MovieInfo {
-        background: white;
+        background: #fff;
+        position: relative;
         text-align: left;
         padding: 2rem 10%;
         display: flex;
-        > div {
-            margin-left: 20px;
-        }
         img {
             position: relative;
             top: -5rem;
         }
+    }
+    .movie-title {
+        margin: 0;
     }
 }

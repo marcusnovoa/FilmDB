@@ -32,9 +32,11 @@ class MovieDetail extends Component {
                     <Overdrive id={`${movie.id}`}>
                         <img className="card" src={`${POSTER_PATH}${movie.poster_path}`} alt={movie.title} />
                     </Overdrive>
-                    <h1>{movie.title}</h1>
-                    <h3>{movie.release_date}</h3>
-                    <p>{movie.overview}</p>
+                    <div class="card info">
+                        <h3 className="movie-title">{movie.title}</h3>
+                        <p className="grey-text">Release Date: {movie.release_date}</p>
+                        <p>{movie.overview}</p>
+                    </div>
                 </div>
             </MovieWrapper>
         );

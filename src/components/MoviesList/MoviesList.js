@@ -25,6 +25,10 @@ class MoviesList extends Component {
         return (
             <div className="MoviesList">
                 <div className="container">
+                    <h1 className="list-title white-text">Welcome to FilmDB</h1>
+                    <h5 className="list-subtitle white-text">All of your basic movie information stored in one place.</h5>
+                </div>
+                <div className="container movies">
                     {this.state.movies.map(movie => <Movie key={movie.id} movie={movie} />)}
                 </div>
             </div>

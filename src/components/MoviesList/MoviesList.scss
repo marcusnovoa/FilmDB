@@ -1,6 +1,13 @@
 .MoviesList {
     margin-top: 3rem;
-    .container {
+    .list-title {
+        margin: 0;
+    }
+    .list-subtitle {
+        margin: .5rem 0 3rem 0;
+        font-style: italic;
+    }
+    .container.movies {
         display: flex;
         flex-wrap: wrap;
         justify-content: space-between;
