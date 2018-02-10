@@ -2,4 +2,17 @@
     .card {
         margin: 0;
     }
+    .MovieInfo {
+        background: white;
+        text-align: left;
+        padding: 2rem 10%;
+        display: flex;
+        > div {
+            margin-left: 20px;
+        }
+        img {
+            position: relative;
+            top: -5rem;
+        }
+    }
 }

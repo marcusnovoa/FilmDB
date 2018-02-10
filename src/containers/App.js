@@ -17,7 +17,7 @@ const App = () => (
 				<nav className="Navbar grey darken-4">
 					<div className="nav-wrapper">
 						<Link to="/" className="brand-logo white-text">
-							FilmDB
+							<i class="material-icons">camera_roll</i> FilmDB
 						</Link>
 						<a data-activates="mobile-demo" className="button-collapse"><i className="material-icons">menu</i></a>
 						<ul className="right hide-on-med-and-down">

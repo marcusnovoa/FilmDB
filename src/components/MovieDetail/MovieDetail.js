@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Overdrive from 'react-overdrive';
+import styled from 'styled-components';
 import './MovieDetail.css';
 
 const POSTER_PATH = 'http://image.tmdb.org/t/p/w154';
@@ -26,17 +27,26 @@ class MovieDetail extends Component {
     render() {
         const { movie } = this.state;
         return (
-            <div className="MovieDetail">
-                <img src={`${BACKDROP_PATH}${movie.backdrop_path}`} alt={movie.title} />
-                <Overdrive id={`${movie.id}`}>
-                    <img className="card" src={`${POSTER_PATH}${movie.poster_path}`} alt={movie.title} />
-                </Overdrive>
-                <h1>{movie.title}</h1>
-                <h3>{movie.release_date}</h3>
-                <p>{movie.overview}</p>
-            </div>
+            <MovieWrapper className="MovieDetail" backdrop={`${BACKDROP_PATH}${movie.backdrop_path}`}>
+                <div className="MovieInfo">
+                    <Overdrive id={`${movie.id}`}>
+                        <img className="card" src={`${POSTER_PATH}${movie.poster_path}`} alt={movie.title} />
+                    </Overdrive>
+                    <h1>{movie.title}</h1>
+                    <h3>{movie.release_date}</h3>
+                    <p>{movie.overview}</p>
+                </div>
+            </MovieWrapper>
         );
     }
 }
+
+const MovieWrapper = styled.div`
+    position: relative;
+    padding-top: 50vh;
+    background: url(${props => props.backdrop}) no-repeat;
+    background-size: cover;
+    background-position: center;
+`;
 
 export default MovieDetail;

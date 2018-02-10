@@ -1,2 +1,13 @@
 .MovieDetail .card {
   margin: 0; }
+
+.MovieDetail .MovieInfo {
+  background: white;
+  text-align: left;
+  padding: 2rem 10%;
+  display: flex; }
+  .MovieDetail .MovieInfo > div {
+    margin-left: 20px; }
+  .MovieDetail .MovieInfo img {
+    position: relative;
+    top: -5rem; }
