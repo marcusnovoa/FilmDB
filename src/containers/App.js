@@ -6,19 +6,23 @@ import Movie from '../components/Movie/Movie';
 const movies = [
 	{
 		id: 1,
-		title: 'Star Wars'
+		title: 'Star Wars',
+		desc: 'A space movie'
 	},
 	{
 		id: 2,
-		title: 'Spider Man'
+		title: 'Spider Man',
+		desc: 'A superhero movie'
 	},
 	{
 		id: 3,
-		title: '36th Chamber of Shaolin'
+		title: '36th Chamber of Shaolin',
+		desc: 'A samurai movie'
 	},
 	{
 		id: 4,
-		title: '5 Deadly Venoms'
+		title: '5 Deadly Venoms',
+		desc: 'A horror movie'
 	}
 ];
 
@@ -29,7 +33,7 @@ class App extends Component {
 				<header>
 					<h1 className="header-title">FilmDB</h1>
 				</header>
-				{movies.map(movie => <Movie key={movie.id} movie={movie} />)}
+				{movies.map(movie => <Movie key={movie.id} movie={movie} desc={movie.desc} />)}
 			</div>
 		);
 	}
