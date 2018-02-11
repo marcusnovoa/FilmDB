@@ -14,7 +14,7 @@
   .MoviesList .input-field {
     margin: 0; }
   .MoviesList .input-field label {
-    color: #fff; }
+    color: #aaa; }
   .MoviesList .input-field input[type=text]:focus + label {
     color: #aaa; }
   .MoviesList .input-field input[type=text]:focus {
