@@ -1,22 +1,22 @@
 // Variables
 $dark_primary: #111;
-$dark_secondary: #333;
+$dark_secondary: #222;
 
 body {
     margin: 0;
     padding: 0;
-    background-color: #222;
-}
-.grey.darken-3 {
     background-color: $dark_secondary;
 }
+.grey.darken-3 {
+    background-color: $dark_secondary !important;
+}
 .grey-text.darken-3 {
-    color: $dark_secondary;
+    color: $dark_secondary !important;
 }
 .grey.darken-4 {
-    background-color: $dark_primary;
+    background-color: $dark_primary !important;
 }
 .grey-text.darken-4 {
-    color: $dark_primary;
+    color: $dark_primary !important;
 }
 

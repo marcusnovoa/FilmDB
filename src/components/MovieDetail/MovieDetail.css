@@ -7,7 +7,7 @@
 
 .MovieDetail .MovieInfo {
   min-height: calc(50vh - 64px);
-  background: #fff;
+  background: #222;
   position: relative;
   text-align: left;
   padding: 2rem 10%;

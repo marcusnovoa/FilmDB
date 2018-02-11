@@ -5,7 +5,7 @@
 .App .button-collapse {
   cursor: pointer; }
 
-.App .card.thumbnail {
+.App .card {
   margin: 0;
   box-shadow: 0 0 35px #000;
   -webkit-box-shadow: 0 0 35px #000; }

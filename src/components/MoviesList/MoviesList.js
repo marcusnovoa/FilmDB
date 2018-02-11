@@ -24,9 +24,24 @@ class MoviesList extends Component {
     render() {
         return (
             <div className="MoviesList">
-                <div className="container">
-                    <h1 className="list-title white-text">Welcome to FilmDB</h1>
-                    <h5 className="list-subtitle white-text">All of your basic movie information stored in one place.</h5>
+                <div className="container title">
+                    <div className="row">
+                        <div className="col s12">
+                            <h4 className="list-title white-text">Welcome to FilmDB</h4>
+                            <p className="list-subtitle white-text">All of your basic movie and TV show information stored in one place.</p>
+                        </div>
+                    </div>
+                    <div className="row filter">
+                        <div className="col s12 m4 white-text">
+                            <p>Search</p>
+                        </div>
+                        <div className="col s12 m4 white-text">
+                            <p>Genres</p>
+                        </div>
+                        <div className="col s12 m4 white-text">
+                            <p>Keywords</p>
+                        </div>
+                    </div>
                 </div>
                 <div className="container movies">
                     {this.state.movies.map(movie => <Movie key={movie.id} movie={movie} />)}

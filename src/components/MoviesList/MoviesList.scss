@@ -4,12 +4,62 @@
         margin: 0;
     }
     .list-subtitle {
-        margin: .5rem 0 3rem 0;
+        margin: .5rem 0 2rem 0;
         font-style: italic;
     }
-    .container.movies {
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: space-between;
+    .container {
+        &.movies {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            .Movie {
+                @media screen and (max-width: 1199px) {
+                    &:nth-child(3n+1){
+                        justify-content: flex-start;
+                    }
+                    &:nth-child(3n+3){
+                        justify-content: flex-end;
+                    }
+                }
+                @media screen and (max-width: 768px) {
+                    justify-content: center !important;
+                }
+                @media screen and (min-width: 1200px) {
+                    &:nth-child(5n+1), &:nth-child(5n+2){
+                        justify-content: flex-start;
+                    }
+                    &:nth-child(5n+2) {
+                        padding-left: .5%;
+                    }
+                    &:nth-child(5n+5), &:nth-child(5n+4){
+                        justify-content: flex-end;
+                    }
+                    &:nth-child(5n+4) {
+                        padding-right: .5%;
+                    }
+                }
+                @media screen and (min-width: 1350px) {
+                    &:nth-child(5n+1), &:nth-child(5n+2){
+                        justify-content: flex-start;
+                    }
+                    &:nth-child(5n+2) {
+                        padding-left: 1.25%;
+                    }
+                    &:nth-child(5n+5), &:nth-child(5n+4){
+                        justify-content: flex-end;
+                    }
+                    &:nth-child(5n+4) {
+                        padding-right: 1.25%;
+                    }
+                }
+            }
+        }
+        .row {
+            &.filter {
+                p {
+                    margin: 0 0 2rem 0;
+                }
+            }
+        }
     }
 }

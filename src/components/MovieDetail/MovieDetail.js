@@ -11,7 +11,7 @@ class MovieDetail extends Component {
         movie: {},
     }
 
-    async componentDidMount() {
+    async componentWillMount() {
         try {
             const res = await fetch(`https://api.themoviedb.org/3/movie/${this.props.match.params.id}?api_key=${process.env.REACT_APP_THEMOVIEDB_API_KEY}&language=en-US`);
             const movie = await res.json();
@@ -37,10 +37,10 @@ class MovieDetail extends Component {
                                 </Overdrive>
                             </div>
                             <div className="col s12 m10">
-                                <div className="card info">
-                                    <h3 className="movie-title">{movie.title}</h3>
-                                    <p className="grey-text">Release Date: {movie.release_date}</p>
-                                    <p>{movie.overview}</p>
+                                <div className="card info grey darken-3">
+                                    <h3 className="movie-title white-text">{movie.title}</h3>
+                                    <p className="grey-text text-darken-2">Release Date: {movie.release_date}</p>
+                                    <p className="white-text">{movie.overview}</p>
                                 </div>
                             </div>
                         </div>
