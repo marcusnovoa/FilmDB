@@ -37,7 +37,7 @@ class MovieDetail extends Component {
                                 </Overdrive>
                             </div>
                             <div className="col s12 m10">
-                                <div class="card info">
+                                <div className="card info">
                                     <h3 className="movie-title">{movie.title}</h3>
                                     <p className="grey-text">Release Date: {movie.release_date}</p>
                                     <p>{movie.overview}</p>
