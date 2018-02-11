@@ -29,13 +29,21 @@ class MovieDetail extends Component {
         return (
             <MovieWrapper className="MovieDetail" backdrop={`${BACKDROP_PATH}${movie.backdrop_path}`}>
                 <div className="MovieInfo">
-                    <Overdrive id={`${movie.id}`}>
-                        <img className="card" src={`${POSTER_PATH}${movie.poster_path}`} alt={movie.title} />
-                    </Overdrive>
-                    <div class="card info">
-                        <h3 className="movie-title">{movie.title}</h3>
-                        <p className="grey-text">Release Date: {movie.release_date}</p>
-                        <p>{movie.overview}</p>
+                    <div className="container">
+                        <div className="row">
+                            <div className="col s12 m2">
+                                <Overdrive id={`${movie.id}`}>
+                                    <img className="card" src={`${POSTER_PATH}${movie.poster_path}`} alt={movie.title} />
+                                </Overdrive>
+                            </div>
+                            <div className="col s12 m10">
+                                <div class="card info">
+                                    <h3 className="movie-title">{movie.title}</h3>
+                                    <p className="grey-text">Release Date: {movie.release_date}</p>
+                                    <p>{movie.overview}</p>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </MovieWrapper>

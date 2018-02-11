@@ -2,12 +2,13 @@
     .card {
         margin: 0;
         &.info {
-            margin: -5rem 0 0 2rem;
+            margin-top: -5rem;
             padding: 2rem;
             width: 100%;
         }
     }
     .MovieInfo {
+        min-height: calc(50vh - 64px);
         background: #fff;
         position: relative;
         text-align: left;
@@ -17,8 +18,34 @@
             position: relative;
             top: -5rem;
         }
+        .row {
+            @media screen and (min-width: 601px) {
+                display: flex;
+                justify-content: space-between;
+            }
+        }
     }
     .movie-title {
         margin: 0;
+    }
+    .col {
+        @media screen and (max-width: 600px) {
+            display: flex;
+            justify-content: center;
+        }
+        &.m2 {
+            @media screen and (max-width: 600px) {
+                margin-bottom: 2rem;
+            }
+            @media screen and (min-width: 601px) {
+                margin-left: 0;
+                width: auto;
+            }
+        }
+        &.m10 {
+            @media screen and (min-width: 601px) and (max-width: 1800px) {
+                margin-left: 1rem;
+            }
+        }
     }
 }
