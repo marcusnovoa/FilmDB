@@ -1,10 +1,33 @@
 .MoviesList {
-  margin-top: 3rem; }
+  margin-top: 3rem;
+  /* label color */
+  /* label focus color */
+  /* label underline focus color */
+  /* valid color */
+  /* invalid color */
+  /* icon prefix focus color */ }
   .MoviesList .list-title {
     margin: 0; }
   .MoviesList .list-subtitle {
     margin: .5rem 0 2rem 0;
     font-style: italic; }
+  .MoviesList .input-field {
+    margin: 0; }
+  .MoviesList .input-field label {
+    color: #fff; }
+  .MoviesList .input-field input[type=text]:focus + label {
+    color: #aaa; }
+  .MoviesList .input-field input[type=text]:focus {
+    border-bottom: 1px solid #fff;
+    box-shadow: 0 1px 0 0 #fff; }
+  .MoviesList .input-field input[type=text].valid {
+    border-bottom: 1px solid #2ecc71;
+    box-shadow: 0 1px 0 0 #2ecc71; }
+  .MoviesList .input-field input[type=text].invalid {
+    border-bottom: 1px solid #e74c3c;
+    box-shadow: 0 1px 0 0 #e74c3c; }
+  .MoviesList .input-field .prefix.active {
+    color: #fff; }
   .MoviesList .container.movies {
     display: flex;
     flex-wrap: wrap;
