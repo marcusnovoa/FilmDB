@@ -6,7 +6,7 @@
     width: 100%; }
 
 .MovieDetail .MovieInfo {
-  min-height: calc(50vh - 64px);
+  min-height: calc(35vh - 64px);
   background: #222;
   position: relative;
   text-align: left;
