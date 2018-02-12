@@ -38,7 +38,8 @@ class MovieDetail extends Component {
                             </div>
                             <div className="col s12 m10">
                                 <div className="card info grey darken-3">
-                                    <h3 className="movie-title white-text">{movie.title}</h3>
+                                    <h4 className="movie-title white-text">{movie.title}</h4>
+                                    <p className="movie-tagline white-text">{movie.tagline}</p>
                                     <p className="grey-text text-darken-2">Release Date: {movie.release_date}</p>
                                     <p className="white-text">{movie.overview}</p>
                                 </div>
