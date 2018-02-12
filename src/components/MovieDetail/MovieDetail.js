@@ -22,6 +22,15 @@ class MovieDetail extends Component {
         } catch(err) {
             console.log(err);
         }
+
+        // Retrieve Movie Genres
+        const { movie } = this.state;
+        const genres = Array.from(movie.genres);
+        const genreNames = genres.map(genre => {
+            return genre.name;
+        });
+        const genreString = genreNames.join(', ');
+        document.getElementById('genres').innerText = `Genres: ${genreString}`;
     }
 
     render() {
@@ -42,6 +51,7 @@ class MovieDetail extends Component {
                                     <p className="movie-tagline white-text">{movie.tagline}</p>
                                     <p className="grey-text text-darken-2">Release Date: {movie.release_date}</p>
                                     <p className="white-text">{movie.overview}</p>
+                                    <p id="genres" className="movie-genres grey-text text-darken-2"></p>
                                 </div>
                             </div>
                         </div>

@@ -28,6 +28,10 @@
     .movie-title {
         margin: 0;
     }
+    .movie-genres {
+        margin-bottom: 0;
+        font-style: italic;
+    }
     .col {
         @media screen and (max-width: 600px) {
             display: flex;
