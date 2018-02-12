@@ -11,6 +11,7 @@ import MoviesList from '../components/MoviesList/MoviesList';
 import MovieDetail from '../components/MovieDetail/MovieDetail';
 import About from '../components/About/About';
 import Contact from '../components/Contact/Contact';
+import Footer from '../components/Footer/Footer';
 
 const App = () => (
 	<Router>
@@ -41,6 +42,7 @@ const App = () => (
 				<Route path="/contact" component={ Contact } />
 				<Route path="/:id" component={ MovieDetail } />
 			</Switch>
+			<Footer />
 		</div>
 	</Router>
 );

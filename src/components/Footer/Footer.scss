@@ -1,0 +1,9 @@
+.Footer {
+    margin-top: 4rem;
+    .footer-copyright .container {
+        text-align: center;
+    }
+    @media screen and (max-width: 992px) {
+        text-align: center;
+    }
+}
