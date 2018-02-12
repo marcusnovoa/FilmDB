@@ -9,6 +9,8 @@ import './App.css';
 
 import MoviesList from '../components/MoviesList/MoviesList';
 import MovieDetail from '../components/MovieDetail/MovieDetail';
+import About from '../components/About/About';
+import Contact from '../components/Contact/Contact';
 
 const App = () => (
 	<Router>
@@ -35,6 +37,8 @@ const App = () => (
 			</header>
 			<Switch>
 				<Route exact path="/" component={ MoviesList } />
+				<Route path="/about" component={ About } />
+				<Route path="/contact" component={ Contact } />
 				<Route path="/:id" component={ MovieDetail } />
 			</Switch>
 		</div>
