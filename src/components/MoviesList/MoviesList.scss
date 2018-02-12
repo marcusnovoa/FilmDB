@@ -44,7 +44,7 @@
         &.movies {
             display: flex;
             flex-wrap: wrap;
-            justify-content: space-between;
+            // justify-content: space-between;
             .Movie {
                 @media screen and (max-width: 1199px) {
                     &:nth-child(3n+1){

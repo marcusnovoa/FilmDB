@@ -30,8 +30,7 @@
     color: #fff; }
   .MoviesList .container.movies {
     display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between; }
+    flex-wrap: wrap; }
     @media screen and (max-width: 1199px) {
       .MoviesList .container.movies .Movie:nth-child(3n+1) {
         justify-content: flex-start; }
