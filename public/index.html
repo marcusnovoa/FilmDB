@@ -47,7 +47,15 @@
 		<!-- Initialize Materialize Nav -->
 		<script>
 			$( document ).ready(function(){
+				// Initialize Navbar
 				$(".button-collapse").sideNav();
+				// 2. Side Navigation fix (for closeOnClick)
+				$('.side-nav li a').on('click', function(e) {
+					windowsize = $(window).width();
+					if (windowsize < 992) {
+					$('.button-collapse').sideNav('hide');
+					}
+				});
 			});
 		</script>
 	</body>

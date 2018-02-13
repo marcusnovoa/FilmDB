@@ -24,7 +24,7 @@ const Footer = props => {
                 </div>
                 <div className="footer-copyright">
                     <div className="container white-text">
-                        © 2018 Copyright Marcus Novoa
+                        © 2018 developed by Marcus Novoa
                     </div>
                 </div>
             </footer>
