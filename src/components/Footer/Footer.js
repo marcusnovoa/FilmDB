@@ -14,10 +14,10 @@ const Footer = props => {
                         <div className="col l4 offset-l2 s12">
                             <h5 className="white-text">My Links</h5>
                             <ul>
-                                <li><a className="grey-text text-lighten-3" href="http://www.marcuscodes.com" target="_blank" rel="noopener noreferrer">Web Portfolio</a></li>
-                                <li><a className="grey-text text-lighten-3" href="http://www.linkedin.com/in/marcusnovoa/" target="_blank" rel="noopener noreferrer">LinkedIn</a></li>
-                                <li><a className="grey-text text-lighten-3" href="http://www.instagram.com/marcuscodes/" target="_blank" rel="noopener noreferrer">Instagram</a></li>
-                                <li><a className="grey-text text-lighten-3" href="http://www.twitter.com/marcuscodes/" target="_blank" rel="noopener noreferrer">Twitter</a></li>
+                                <li><a className="footer-link" href="http://www.marcuscodes.com" target="_blank" rel="noopener noreferrer">Web Portfolio</a></li>
+                                <li><a className="footer-link" href="http://www.github.com/marcusnovoa" target="_blank" rel="noopener noreferrer">GitHub</a></li>
+                                <li><a className="footer-link" href="http://www.linkedin.com/in/marcusnovoa/" target="_blank" rel="noopener noreferrer">LinkedIn</a></li>
+                                <li><a className="footer-link" href="http://www.instagram.com/marcuscodes/" target="_blank" rel="noopener noreferrer">Instagram</a></li>
                             </ul>
                         </div>
                     </div>

@@ -7,7 +7,7 @@
   /* invalid color */
   /* icon prefix focus color */ }
   .MoviesList .list-title {
-    margin: 0; }
+    margin-bottom: 0; }
   .MoviesList .list-subtitle {
     margin: .5rem 0 2rem 0; }
   .MoviesList .input-field {

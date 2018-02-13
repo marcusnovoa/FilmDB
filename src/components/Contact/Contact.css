@@ -1,0 +1,9 @@
+.Contact {
+  min-height: 75vh;
+  margin-top: 3rem; }
+  .Contact .contact-title {
+    margin-bottom: 2rem; }
+  .Contact .row {
+    margin-bottom: 0; }
+    .Contact .row.info p:first-child {
+      margin-top: 0; }

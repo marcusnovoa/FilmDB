@@ -1,0 +1,9 @@
+.About {
+  min-height: 75vh;
+  margin-top: 3rem; }
+  .About .about-title {
+    margin-bottom: 2rem; }
+  .About .row {
+    margin-bottom: 0; }
+    .About .row.info p:first-child {
+      margin-top: 0; }

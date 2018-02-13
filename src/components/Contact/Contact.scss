@@ -1,0 +1,17 @@
+.Contact {
+    min-height: 75vh;
+    margin-top: 3rem;
+    .contact-title {
+        margin-bottom: 2rem;
+    }
+    .row {
+        margin-bottom: 0;
+        &.info {
+            p {
+                &:first-child {
+                    margin-top: 0;
+                }
+            }
+        }
+    }
+}

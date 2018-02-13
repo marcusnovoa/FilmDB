@@ -1,0 +1,17 @@
+.About {
+    min-height: 75vh;
+    margin-top: 3rem;
+    .about-title {
+        margin-bottom: 2rem;
+    }
+    .row {
+        margin-bottom: 0;
+        &.info {
+            p {
+                &:first-child {
+                    margin-top: 0;
+                }
+            }
+        }
+    }
+}
