@@ -27,7 +27,7 @@ const About = () => (
                         <li><p className="white-text">- SCSS</p></li>
                     </ul>
                     <p className="white-text">
-                        My Git repository can be found here: <a href="https://github.com/marcusnovoa/FilmDB">FilmDB GitHub</a>
+                        My Git repository can be found here: <a href="https://github.com/marcusnovoa/FilmDB" target="_blank" rel="noopener noreferrer">FilmDB GitHub</a>
                     </p>
                 </div>
             </div>
