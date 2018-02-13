@@ -3,8 +3,8 @@ import Overdrive from 'react-overdrive';
 import styled from 'styled-components';
 import './MovieDetail.css';
 
-const POSTER_PATH = 'http://image.tmdb.org/t/p/w154';
-const BACKDROP_PATH = 'http://image.tmdb.org/t/p/w1280';
+const POSTER_PATH = 'https://image.tmdb.org/t/p/w154';
+const BACKDROP_PATH = 'https://image.tmdb.org/t/p/w1280';
 
 class MovieDetail extends Component {
     state = {

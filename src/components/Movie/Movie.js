@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import Overdrive from 'react-overdrive';
 import './Movie.css';
 
-const POSTER_PATH = 'http://image.tmdb.org/t/p/w154';
+const POSTER_PATH = 'https://image.tmdb.org/t/p/w154';
 
 const Movie = ({ movie }) => (
     <div className="Movie">
