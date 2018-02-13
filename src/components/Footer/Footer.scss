@@ -1,5 +1,12 @@
 .Footer {
     margin-top: 4rem;
+    a {
+        color: #616161;
+        transition: color 200ms ease;
+        &:hover {
+            color: #fff !important;
+        }
+    }
     .footer-copyright .container {
         text-align: center;
     }

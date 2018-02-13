@@ -1,6 +1,11 @@
 .About {
   min-height: 75vh;
   margin-top: 3rem; }
+  .About a {
+    color: #616161;
+    transition: color 200ms ease; }
+    .About a:hover {
+      color: #fff !important; }
   .About .about-title {
     margin-bottom: 2rem; }
   .About .row {

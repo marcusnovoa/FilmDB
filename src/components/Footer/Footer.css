@@ -1,5 +1,10 @@
 .Footer {
   margin-top: 4rem; }
+  .Footer a {
+    color: #616161;
+    transition: color 200ms ease; }
+    .Footer a:hover {
+      color: #fff !important; }
   .Footer .footer-copyright .container {
     text-align: center; }
   @media screen and (max-width: 992px) {

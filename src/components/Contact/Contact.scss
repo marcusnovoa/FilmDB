@@ -1,6 +1,13 @@
 .Contact {
     min-height: 75vh;
     margin-top: 3rem;
+    a {
+        color: #616161;
+        transition: color 200ms ease;
+        &:hover {
+            color: #fff !important;
+        }
+    }
     .contact-title {
         margin-bottom: 2rem;
     }

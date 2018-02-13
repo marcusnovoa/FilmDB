@@ -1,17 +1,7 @@
 .App {
     .Navbar {
-        a {
-            color: #fff !important;
-        }
         @media screen and (min-width: 993px) {
             padding-left: 15px;
-        }
-    }
-    a {
-        color: #616161;
-        transition: color 200ms ease;
-        &:hover {
-            color: #fff !important;
         }
     }
     .button-collapse {
