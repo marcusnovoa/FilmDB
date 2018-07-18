@@ -9,9 +9,17 @@ const POSTER_PATH = 'https://image.tmdb.org/t/p/w154';
 const Movie = ({ movie }) => (
     <div className="Movie">
         <Link to={`/${movie.id}`}>
-            <Overdrive id={`${movie.id}`}>
+            <Overdrive id={`${movie.id}`} className="ThumbnailCon">
                 <img className="card thumbnail" src={`${POSTER_PATH}${movie.poster_path}`} alt={movie.title} />
             </Overdrive>
+            <div className="RatingCon">
+                <div className="Rating">
+                    <i className="material-icons">
+                        star_rate
+                    </i>
+                    <p>{`${movie.vote_average}`}</p>
+                </div>
+            </div>
         </Link>
     </div>
 );

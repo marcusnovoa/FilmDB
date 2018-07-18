@@ -1,8 +1,44 @@
 .Movie {
     width: 20%;
     display: flex;
+    position: relative;
+    flex-direction: column;
     justify-content: center;
-    margin: .5rem 0 1rem 0;
+    margin-bottom: 3rem;
+    .RatingCon {
+        display: flex;
+        justify-content: center;
+        width: 100%;
+        position: absolute;
+        bottom: -25px;
+        .Rating {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            background-color: #c0392b;
+            border-radius: .3rem;
+            padding: .25rem;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.6);
+            -webkit-box-shadow: 0 0 20px rgba(0, 0, 0, 0.6);
+            .material-icons {
+                color: #fff;
+                width: 22px;
+                font-size: 1.3rem;
+            }
+            p {
+                font-size: 1rem;
+                padding-right: .25rem;
+                margin: 0;
+                color: #fff;
+            }
+        }
+    }
+    .ThumbnailCon {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
     @media screen and (max-width: 1199px) {
         width: 33.3%;
     }

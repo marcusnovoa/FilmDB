@@ -22,6 +22,8 @@ class MoviesList extends Component {
             this.setState({
                 movies: movies.results,
             });
+
+            console.log(this.state.movies);
         } catch (err) {
             console.log(err);
         }
