@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import './MoviesList.css';
+import ReactPaginate from 'react-paginate';
 
 import Movie from '../Movie/Movie';
 
@@ -8,22 +9,26 @@ class MoviesList extends Component {
         super(props);
 
         this.state = {
+            pages: [],
             movies: [],
+            pageNum: 1
         };
 
         this.keywordSearch = this.keywordSearch.bind(this);
+        this.handlePageClick = this.handlePageClick.bind(this);
     }
 
     async onLoadResults() {
         try {
-            const res = await fetch(`https://api.themoviedb.org/3/discover/movie?api_key=${process.env.REACT_APP_THEMOVIEDB_API_KEY}&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=1`);
+            const res = await fetch(`https://api.themoviedb.org/3/discover/movie?api_key=${process.env.REACT_APP_THEMOVIEDB_API_KEY}&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=${this.state.pageNum}`);
             const movies = await res.json();
 
             this.setState({
-                movies: movies.results,
+                pages: movies,
+                movies: movies.results
             });
 
-            console.log(this.state.movies);
+            console.log(this.state.pages);
         } catch (err) {
             console.log(err);
         }
@@ -42,15 +47,48 @@ class MoviesList extends Component {
                 const movies = await res.json();
 
                 this.setState({
-                    movies: movies.results,
+                    pages: movies,
+                    movies: movies.results
                 });
-
-                // console.log(movies)
             } catch (err) {
                 console.log(err);
             }
         } else {
             this.onLoadResults();
+        }
+    }
+
+    async handlePageClick(e) {
+        const pageNum = e.selected + 1;
+        const keyword = document.getElementById('search').value;
+
+        if(keyword === '') {
+            try {
+                const res = await fetch(`https://api.themoviedb.org/3/discover/movie?api_key=${process.env.REACT_APP_THEMOVIEDB_API_KEY}&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=${pageNum}`);
+                const movies = await res.json();
+
+                this.setState({
+                    movies: movies.results,
+                    pageNum
+                });
+            } catch (err) {
+                console.log(err);
+            }
+        } else {
+            const pageNum = e.selected + 1;
+
+            try {
+                const res = await fetch(`https://api.themoviedb.org/3/search/movie?api_key=${process.env.REACT_APP_THEMOVIEDB_API_KEY}&query=${keyword}&page=${pageNum}`);
+                const movies = await res.json();
+
+                this.setState({
+                    pages: movies,
+                    movies: movies.results,
+                    pageNum
+                });
+            } catch (err) {
+                console.log(err);
+            }
         }
     }
 
@@ -73,6 +111,19 @@ class MoviesList extends Component {
                             </div>
                         </div>
                     </div>
+                </div>
+                <div style={{ width: '100%', display: 'flex', justifyContent: 'center', marginBottom: '3rem' }}>
+                    <ReactPaginate previousLabel={"Prev"}
+                        nextLabel={"Next"}
+                        breakLabel={<a href="">...</a>}
+                        breakClassName={"break-me"}
+                        pageCount={this.state.pages.total_pages}
+                        marginPagesDisplayed={0}
+                        pageRangeDisplayed={7}
+                        onPageChange={this.handlePageClick}
+                        containerClassName={"pagination"}
+                        subContainerClassName={"pages pagination"}
+                        activeClassName={"active"} />
                 </div>
                 <div className="container movies">
                     {this.state.movies.map(movie => <Movie key={movie.id} movie={movie} />)}

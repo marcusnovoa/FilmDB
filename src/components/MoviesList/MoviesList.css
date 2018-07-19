@@ -10,6 +10,19 @@
     margin-bottom: 0; }
   .MoviesList .list-subtitle {
     margin: .5rem 0 2rem 0; }
+  .MoviesList .pagination li a {
+    color: #9E9E9E; }
+  .MoviesList .pagination li.active a {
+    color: #111; }
+  .MoviesList .pagination li:hover {
+    cursor: pointer; }
+  .MoviesList .pagination li.active {
+    background-color: #fff; }
+  .MoviesList *:focus {
+    outline: 0; }
+  @media only screen and (max-width: 992px) {
+    .MoviesList .pagination {
+      width: auto; } }
   .MoviesList .input-field {
     margin: 0; }
   .MoviesList .input-field label {
