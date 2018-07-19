@@ -22,7 +22,7 @@ const Movie = ({ movie }) => {
         <div className="Movie">
             <Link to={`/${movie.id}`}>
                 <Overdrive id={`${movie.id}`} className="ThumbnailCon">
-                    <img className="card thumbnail" src={`${POSTER_PATH}${movie.poster_path}`} alt={movie.title} />
+                    <img className="card thumbnail" src={`${POSTER_PATH}${movie.poster_path}`} alt={`${movie.title}`} />
                 </Overdrive>
                 <div className="RatingCon">
                     <div className="Rating" style={{ backgroundColor: bgColor }}>

@@ -129,6 +129,8 @@ class MoviesList extends Component {
                     {this.state.movies.map(movie => {
                         if(movie.poster_path) {
                             return <Movie key={movie.id} movie={movie} />;
+                        } else {
+                            return null;
                         }
                     })};
                 </div>
