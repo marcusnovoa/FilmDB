@@ -13,12 +13,14 @@ class MovieDetail extends Component {
 
     async componentDidMount() {
         try {
-            const res = await fetch(`https://api.themoviedb.org/3/movie/${this.props.match.params.id}?api_key=${process.env.REACT_APP_THEMOVIEDB_API_KEY}&language=en-US`);
+            const res = await fetch(`https://api.themoviedb.org/3/movie/${this.props.match.params.id}?api_key=${process.env.REACT_APP_THEMOVIEDB_API_KEY}&language=en-US&append_to_response=credits,videos`);
             const movie = await res.json();
 
             this.setState({
                 movie,
             });
+
+            console.log(movie);
         } catch(err) {
             console.log(err);
         }
