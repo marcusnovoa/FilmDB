@@ -20,19 +20,23 @@ class MovieDetail extends Component {
                 movie
             });
 
-            // console.log(movie);
+            const members = movie.credits.cast.map(member => member.name);
+            console.log(members);
+            console.log(movie.videos.results);
         } catch(err) {
             console.log(err);
         }
 
         // Retrieve Movie Genres
         const { movie } = this.state;
-        const genres = Array.from(movie.genres);
-        const genreNames = genres.map(genre => {
-            return genre.name;
-        });
-        const genreString = genreNames.join(', ');
-        document.getElementById('genres').innerText = `Genres: ${genreString}`;
+        if(movie.genres) {
+            const genres = Array.from(movie.genres);
+            const genreNames = genres.map(genre => {
+                return genre.name;
+            });
+            const genreString = genreNames.join(', ');
+            document.getElementById('genres').innerText = `Genres: ${genreString}`;
+        }
     }
 
     render() {

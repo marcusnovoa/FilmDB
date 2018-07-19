@@ -27,8 +27,7 @@ class MoviesList extends Component {
                 pages: movies,
                 movies: movies.results
             });
-
-            console.log(this.state.pages);
+            // console.log(this.state.pages);
         } catch (err) {
             console.log(err);
         }
@@ -40,10 +39,11 @@ class MoviesList extends Component {
     
     async keywordSearch() {
         const keyword = document.getElementById('search').value;
+        this.setState({ pageNum: 1 });
 
         if(keyword !== '') {
             try {
-                const res = await fetch(`https://api.themoviedb.org/3/search/movie?api_key=${process.env.REACT_APP_THEMOVIEDB_API_KEY}&query=${keyword}&page=1`);
+                const res = await fetch(`https://api.themoviedb.org/3/search/multi?api_key=${process.env.REACT_APP_THEMOVIEDB_API_KEY}&query=${keyword}&page=${this.state.pageNum}`);
                 const movies = await res.json();
 
                 this.setState({
@@ -126,7 +126,11 @@ class MoviesList extends Component {
                         activeClassName={"active"} />
                 </div>
                 <div className="container movies">
-                    {this.state.movies.map(movie => <Movie key={movie.id} movie={movie} />)}
+                    {this.state.movies.map(movie => {
+                        if(movie.poster_path) {
+                            return <Movie key={movie.id} movie={movie} />;
+                        }
+                    })};
                 </div>
             </div>
         );
