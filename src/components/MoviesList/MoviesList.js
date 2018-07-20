@@ -14,48 +14,11 @@ class MoviesList extends Component {
             pageNum: 1
         };
 
-        this.keywordSearch = this.keywordSearch.bind(this);
         this.handlePageClick = this.handlePageClick.bind(this);
     }
 
-    async onLoadResults() {
-        try {
-            const res = await fetch(`https://api.themoviedb.org/3/discover/movie?api_key=${process.env.REACT_APP_THEMOVIEDB_API_KEY}&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=${this.state.pageNum}`);
-            const movies = await res.json();
-
-            this.setState({
-                pages: movies,
-                movies: movies.results
-            });
-            // console.log(this.state.pages);
-        } catch (err) {
-            console.log(err);
-        }
-    }
-
     componentDidMount() {
-        this.onLoadResults();
-    }
-    
-    async keywordSearch() {
-        const keyword = document.getElementById('search').value;
-        this.setState({ pageNum: 1 });
-
-        if(keyword !== '') {
-            try {
-                const res = await fetch(`https://api.themoviedb.org/3/search/multi?api_key=${process.env.REACT_APP_THEMOVIEDB_API_KEY}&query=${keyword}&page=${this.state.pageNum}`);
-                const movies = await res.json();
-
-                this.setState({
-                    pages: movies,
-                    movies: movies.results
-                });
-            } catch (err) {
-                console.log(err);
-            }
-        } else {
-            this.onLoadResults();
-        }
+        this.props.context.state.fetchMovies();
     }
 
     async handlePageClick(e) {
@@ -106,7 +69,7 @@ class MoviesList extends Component {
                         <div className="col s12 white-text">
                             <div className="input-field">
                                 <i className="material-icons prefix">search</i>
-                                <input id="search" type="text" className="search-input" onChange={this.keywordSearch}></input>
+                                <input id="search" type="text" className="search-input" onChange={this.props.context.keywordSearch}></input>
                                 <label htmlFor="search" data-error="wrong" data-success="right">Search for Movies and TV Shows...</label>
                             </div>
                         </div>
@@ -126,7 +89,7 @@ class MoviesList extends Component {
                         activeClassName={"active"} />
                 </div>
                 <div className="container movies">
-                    {this.state.movies.map(movie => {
+                    {this.props.context.state.movies.map(movie => {
                         if(movie.poster_path) {
                             return <Movie key={movie.id} movie={movie} />;
                         } else {

@@ -1,5 +1,5 @@
 import React from 'react';
-import PropTypes from 'prop-types';
+// import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import Overdrive from 'react-overdrive';
 import './Movie.css';
@@ -20,9 +20,9 @@ const Movie = ({ movie }) => {
 
     return (
         <div className="Movie">
-            <Link to={`/${movie.id}`}>
+            <Link to={movie.media_type ? `/${movie.media_type}/${movie.id}` : `movie/${movie.id}`}>
                 <Overdrive id={`${movie.id}`} className="ThumbnailCon">
-                    <img className="card thumbnail" src={`${POSTER_PATH}${movie.poster_path}`} alt={`${movie.title}`} />
+                    <img className="card thumbnail" src={`${POSTER_PATH}${movie.poster_path}`} alt={movie.title ? `${movie.title}` : `${movie.name}`} />
                 </Overdrive>
                 <div className="RatingCon">
                     <div className="Rating" style={{ backgroundColor: bgColor }}>
@@ -37,10 +37,10 @@ const Movie = ({ movie }) => {
     );
 };
 
-Movie.propTypes = {
-    movie: PropTypes.shape({
-        title: PropTypes.string.isRequired,
-    }).isRequired,
-};
+// Movie.propTypes = {
+//     movie: PropTypes.shape({
+//         title: PropTypes.string.isRequired,
+//     }).isRequired,
+// };
 
 export default Movie;
