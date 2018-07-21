@@ -2,26 +2,31 @@
 	.card {
 		margin: 0;
 		&.info {
-			margin-top: -5rem;
+			// margin-top: -5rem;
 			padding: 2rem;
 			width: 100%;
 		}
 	}
 	.MovieInfo {
-		min-height: calc(35vh - 64px);
+		// min-height: calc(35vh - 64px);
+		margin-bottom: 3rem;
 		background: #222;
 		position: relative;
 		text-align: left;
-		padding: 2rem 10% 0 10%;
+		// padding: 2rem 10% 0 10%;
 		display: flex;
 		img {
 			position: relative;
-			top: -5rem;
+			// top: -5rem;
 		}
-		.row {
-			@media screen and (min-width: 601px) {
-				display: flex;
-				justify-content: space-between;
+		.container {
+			margin-top: -2rem;
+			.row {
+				margin-bottom: 0;
+				@media screen and (min-width: 601px) {
+					display: flex;
+					justify-content: space-between;
+				}
 			}
 		}
 	}
