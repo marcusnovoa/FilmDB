@@ -82,16 +82,14 @@ class MovieDetail extends Component {
 												src={`${POSTER_PATH}${movie.poster_path}`}
 												alt={movie.title ? `${movie.title}` : `${movie.name}`}
 											/> :
-											<div className="card thumbnail"
-													style={{
-														width: '154px',
-														height: '231px',
-														backgroundColor: '#ccc',
-														color: '#000',
-														display: 'flex',
-														textAlign: 'center',
-														justifyContent: 'center',
-														alignItems: 'center' }}>
+											<div className="card thumbnail grey darken-3 white-text"
+													 style={{
+														 width: '154px',
+														 height: '231px',
+														 display: 'flex',
+														 textAlign: 'center',
+														 justifyContent: 'center',
+														 alignItems: 'center' }}>
 												<p>{movie.title ? movie.title : movie.name}</p>
 											</div>
 										}

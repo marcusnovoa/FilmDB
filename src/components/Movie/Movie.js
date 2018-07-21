@@ -33,12 +33,10 @@ const Movie = ({ movie }) => {
 							src={`${POSTER_PATH}${movie.poster_path}`}
 							alt={movie.title ? `${movie.title}` : `${movie.name}`}
 						/> :
-						<div className="card thumbnail"
+						<div className="card thumbnail grey darken-3 white-text"
 								 style={{
 									 width: '154px',
 									 height: '231px',
-									 backgroundColor: '#ccc',
-									 color: '#000',
 									 display: 'flex',
 									 textAlign: 'center',
 									 justifyContent: 'center',

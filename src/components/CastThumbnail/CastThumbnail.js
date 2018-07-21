@@ -13,7 +13,7 @@ const castThumbnail = props => (
         <p style={{ textAlign: 'center', color: '#fff', marginBottom: 0 }}>{props.name}</p>
       </Fragment>
      ) : (
-      <div className="card" style={{ width: '92px', height: '138px', backgroundColor: '#ccc', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+      <div className="card grey darken-3 white-text" style={{ width: '92px', height: '138px', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
         <p style={{ textAlign: 'center' }}>{props.name}</p>
       </div>
      )}
