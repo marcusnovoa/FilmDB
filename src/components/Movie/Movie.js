@@ -27,11 +27,25 @@ const Movie = ({ movie }) => {
 				}
 			>
 				<Overdrive id={`${movie.id}`} className="ThumbnailCon">
-					<img
-						className="card thumbnail"
-						src={`${POSTER_PATH}${movie.poster_path}`}
-						alt={movie.title ? `${movie.title}` : `${movie.name}`}
-					/>
+					{movie.poster_path ?
+						<img
+							className="card thumbnail"
+							src={`${POSTER_PATH}${movie.poster_path}`}
+							alt={movie.title ? `${movie.title}` : `${movie.name}`}
+						/> :
+						<div className="card thumbnail"
+								 style={{
+									 width: '154px',
+									 height: '231px',
+									 backgroundColor: '#ccc',
+									 color: '#000',
+									 display: 'flex',
+									 textAlign: 'center',
+									 justifyContent: 'center',
+									 alignItems: 'center' }}>
+							<p>{movie.title ? movie.title : movie.name}</p>
+						</div>
+					}
 				</Overdrive>
 				<div className="RatingCon">
 					<div className="Rating" style={{ backgroundColor: bgColor }}>

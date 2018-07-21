@@ -56,12 +56,13 @@ class MovieDetail extends Component {
 
 	render() {
 		const { movie } = this.state;
+		const castInfoLength = this.state.castInfo.length >= 6 ? 6 : this.state.castInfo.length;
 		const settings = {
 			dots: true,
 			infinite: true,
 			speed: 500,
-			slidesToShow: 6,
-			slidesToScroll: 6
+			slidesToShow: castInfoLength,
+			slidesToScroll: castInfoLength
 		};
 
 		return (
@@ -75,11 +76,25 @@ class MovieDetail extends Component {
 							<div className="row">
 								<div className="col s12 m2">
 									<Overdrive id={`${movie.id}`}>
-										<img
-											className="card"
-											src={`${POSTER_PATH}${movie.poster_path}`}
-											alt={movie.title ? movie.title : movie.name}
-										/>
+										{movie.poster_path ?
+											<img
+												className="card thumbnail"
+												src={`${POSTER_PATH}${movie.poster_path}`}
+												alt={movie.title ? `${movie.title}` : `${movie.name}`}
+											/> :
+											<div className="card thumbnail"
+													style={{
+														width: '154px',
+														height: '231px',
+														backgroundColor: '#ccc',
+														color: '#000',
+														display: 'flex',
+														textAlign: 'center',
+														justifyContent: 'center',
+														alignItems: 'center' }}>
+												<p>{movie.title ? movie.title : movie.name}</p>
+											</div>
+										}
 									</Overdrive>
 								</div>
 								<div className="col s12 m10">

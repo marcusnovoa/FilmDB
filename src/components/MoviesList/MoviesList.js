@@ -74,13 +74,7 @@ class MoviesList extends Component {
 					/>
 				</div>
 				<div className="container movies">
-					{this.props.context.state.movies.map(movie => {
-						if (movie.poster_path) {
-							return <Movie key={movie.id} movie={movie} />;
-						} else {
-							return null;
-						}
-					})};
+					{this.props.context.state.movies.map(movie => <Movie key={movie.id} movie={movie} /> )};
 				</div>
 			</div>
 		);

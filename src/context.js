@@ -45,7 +45,7 @@ export default class MyProvider extends Component {
 						if (keyword !== '') {
 							try {
 								const res = await fetch(
-									`https://api.themoviedb.org/3/search/multi?api_key=${process.env.REACT_APP_THEMOVIEDB_API_KEY}&query=${keyword}&include_adult=false&page=${this.state.pageNum}`
+									`https://api.themoviedb.org/3/search/multi?api_key=${process.env.REACT_APP_THEMOVIEDB_API_KEY}&query=${keyword}&include_adult=false&page=1`
 								);
 								const movies = await res.json();
 
@@ -53,6 +53,8 @@ export default class MyProvider extends Component {
 									pages: movies,
 									movies: movies.results
 								});
+
+								console.log(this.state.movies);
 							} catch (err) {
 								console.log(err);
 							}
