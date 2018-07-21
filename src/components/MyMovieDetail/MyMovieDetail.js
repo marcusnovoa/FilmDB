@@ -1,7 +1,7 @@
 import React from 'react';
 import MovieDetail from '../MovieDetail/MovieDetail';
 
-import { MyContext } from '../../containers/App';
+import { MyContext } from '../../context';
 
 const MyMovieDetail = props => {
   return (
