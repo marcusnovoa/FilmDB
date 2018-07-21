@@ -5,53 +5,11 @@ import ReactPaginate from 'react-paginate';
 import Movie from '../Movie/Movie';
 
 class MoviesList extends Component {
-    constructor(props) {
-        super(props);
-
-        this.state = {
-            pages: [],
-            movies: [],
-            pageNum: 1
-        };
-
-        this.handlePageClick = this.handlePageClick.bind(this);
-    }
-
     componentDidMount() {
         this.props.context.state.fetchMovies();
-    }
 
-    async handlePageClick(e) {
-        const pageNum = e.selected + 1;
-        const keyword = document.getElementById('search').value;
-
-        if(keyword === '') {
-            try {
-                const res = await fetch(`https://api.themoviedb.org/3/discover/movie?api_key=${process.env.REACT_APP_THEMOVIEDB_API_KEY}&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=${pageNum}`);
-                const movies = await res.json();
-
-                this.setState({
-                    movies: movies.results,
-                    pageNum
-                });
-            } catch (err) {
-                console.log(err);
-            }
-        } else {
-            const pageNum = e.selected + 1;
-
-            try {
-                const res = await fetch(`https://api.themoviedb.org/3/search/movie?api_key=${process.env.REACT_APP_THEMOVIEDB_API_KEY}&query=${keyword}&page=${pageNum}`);
-                const movies = await res.json();
-
-                this.setState({
-                    pages: movies,
-                    movies: movies.results,
-                    pageNum
-                });
-            } catch (err) {
-                console.log(err);
-            }
+        if (this.props.context.state.keyword !== '') {
+            document.getElementById('search-label').classList.add('active');
         }
     }
 
@@ -69,24 +27,27 @@ class MoviesList extends Component {
                         <div className="col s12 white-text">
                             <div className="input-field">
                                 <i className="material-icons prefix">search</i>
-                                <input id="search" type="text" className="search-input" onChange={this.props.context.keywordSearch}></input>
-                                <label htmlFor="search" data-error="wrong" data-success="right">Search for Movies and TV Shows...</label>
+                                <input id="search" type="text" className="search-input" onChange={this.props.context.keywordSearch} value={this.props.context.state.keyword}></input>
+                                <label id="search-label" htmlFor="search" data-error="wrong" data-success="right">Search for Movies and TV Shows...</label>
                             </div>
                         </div>
                     </div>
                 </div>
                 <div style={{ width: '100%', display: 'flex', justifyContent: 'center', marginBottom: '3rem' }}>
-                    <ReactPaginate previousLabel={"Prev"}
-                        nextLabel={"Next"}
+                    <ReactPaginate
+                        activeClassName={"active"}
                         breakLabel={<a href="">...</a>}
                         breakClassName={"break-me"}
-                        pageCount={this.state.pages.total_pages}
+                        initialPage={this.props.context.state.pageNum - 1}
+                        forcePage={this.props.context.state.pageNum - 1}
+                        previousLabel={"Prev"}
+                        nextLabel={"Next"}
+                        pageCount={this.props.context.state.pages.total_pages}
                         marginPagesDisplayed={0}
                         pageRangeDisplayed={7}
-                        onPageChange={this.handlePageClick}
+                        onPageChange={this.props.context.handlePageClick}
                         containerClassName={"pagination"}
-                        subContainerClassName={"pages pagination"}
-                        activeClassName={"active"} />
+                        subContainerClassName={"pages pagination"} />
                 </div>
                 <div className="container movies">
                     {this.props.context.state.movies.map(movie => {
