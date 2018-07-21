@@ -12,3 +12,21 @@
 
 .App .row.inner {
   margin: 0; }
+
+.App .slick-list {
+  padding: 2rem 0; }
+
+.App .slick-dots li button:before {
+  font-size: 8px; }
+
+.App .slick-prev:before,
+.App .slick-next:before {
+  opacity: 1;
+  color: #616161; }
+
+.App .slick-dots li.slick-active button:before {
+  opacity: 1;
+  color: white; }
+
+.App .slick-dots li button:before {
+  color: white; }

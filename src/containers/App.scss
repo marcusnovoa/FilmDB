@@ -1,18 +1,38 @@
 .App {
-    .Navbar {
-        @media screen and (min-width: 993px) {
-            padding-left: 15px;
-        }
-    }
-    .button-collapse {
-        cursor: pointer;
-    }
-    .card {
-        margin: 0;
-        box-shadow: 0 0 35px #000;
-        -webkit-box-shadow: 0 0 35px #000;
-    }
-    .row.inner {
-        margin: 0;
-    }
+	.Navbar {
+		@media screen and (min-width: 993px) {
+			padding-left: 15px;
+		}
+	}
+	.button-collapse {
+		cursor: pointer;
+	}
+	.card {
+		margin: 0;
+		box-shadow: 0 0 35px #000;
+		-webkit-box-shadow: 0 0 35px #000;
+	}
+	.row.inner {
+		margin: 0;
+	}
+
+	// React Slick - Slider (MovieDetail)
+	.slick-list {
+		padding: 2rem 0;
+	}
+	.slick-dots li button:before {
+		font-size: 8px;
+	}
+	.slick-prev:before,
+	.slick-next:before {
+		opacity: 1;
+		color: #616161;
+	}
+	.slick-dots li.slick-active button:before {
+		opacity: 1;
+		color: white;
+	}
+	.slick-dots li button:before {
+		color: white;
+	}
 }

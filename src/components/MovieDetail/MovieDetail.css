@@ -10,7 +10,7 @@
   background: #222;
   position: relative;
   text-align: left;
-  padding: 2rem 10%;
+  padding: 2rem 10% 0 10%;
   display: flex; }
   .MovieDetail .MovieInfo img {
     position: relative;
