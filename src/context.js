@@ -9,6 +9,10 @@ export default class MyProvider extends Component {
 		movies: [],
 		pageNum: 1,
 		keyword: '',
+		videoPlayer: {
+			playVideo: false,
+			videoPath: ''
+		},
 		fetchMovies: async () => {
 			const keyword = document.getElementById('search').value;
 			const url =
@@ -96,6 +100,27 @@ export default class MyProvider extends Component {
 								console.log(err);
 							}
 						}
+					},
+					openVideo: e => {
+						const videoPathArr = e.target.classList.contains('play-btn') ?
+							e.target.nextSibling.src.split('/') :
+							e.target.src.split('/');
+						const videoPath = videoPathArr[4];
+						this.setState({
+							videoPlayer: {
+								playVideo: true,
+								videoPath
+							}
+						});
+					},
+					closeVideo: () => {
+						const videoPath = '';
+						this.setState({
+							videoPlayer: {
+								playVideo: false,
+								videoPath
+							}
+						});
 					}
 				}}
 			>

@@ -33,24 +33,31 @@ const Movie = ({ movie }) => {
 							src={`${POSTER_PATH}${movie.poster_path}`}
 							alt={movie.title ? `${movie.title}` : `${movie.name}`}
 						/> :
+					movie.profile_path ?
+						<img
+							className="card thumbnail"
+							src={`${POSTER_PATH}${movie.profile_path}`}
+							alt={movie.name}
+						/> :
 						<div className="card thumbnail grey darken-3 white-text"
-								 style={{
-									 width: '154px',
-									 height: '231px',
-									 display: 'flex',
-									 textAlign: 'center',
-									 justifyContent: 'center',
-									 alignItems: 'center' }}>
+							style={{
+								width: '154px',
+								height: '231px',
+								display: 'flex',
+								textAlign: 'center',
+								justifyContent: 'center',
+								alignItems: 'center' }}>
 							<p>{movie.title ? movie.title : movie.name}</p>
 						</div>
 					}
 				</Overdrive>
-				<div className="RatingCon">
-					<div className="Rating" style={{ backgroundColor: bgColor }}>
-						<i className="material-icons">star_rate</i>
-						<p>{`${movie.vote_average}`}</p>
-					</div>
-				</div>
+				{movie.vote_average ?
+					<div className="RatingCon">
+						<div className="Rating" style={{ backgroundColor: bgColor }}>
+							<i className="material-icons">star_rate</i>
+							<p>{`${movie.vote_average}`}</p>
+						</div>
+					</div> : null}
 			</Link>
 		</div>
 	);

@@ -8,7 +8,7 @@ const Footer = props => {
                 <div className="container">
                     <div className="row">
                         <div className="col l6 s12">
-                            <h5 className="white-text">By Marcus Novoa</h5>
+                            <h5 className="white-text">FilmDB</h5>
                             <p className="grey-text text-lighten-4">Feel free to visit me on social media.</p>
                         </div>
                         <div className="col l4 offset-l2 s12">
@@ -24,7 +24,7 @@ const Footer = props => {
                 </div>
                 <div className="footer-copyright">
                     <div className="container white-text">
-                        © 2018 developed by Marcus Novoa
+                        © 2018 FilmDB developed by Marcus Novoa
                     </div>
                 </div>
             </footer>

@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Route, Switch, Link } from 'react-router-dom';
 import './App.css';
 import MyMoviesList from '../components/MyMoviesList/MyMoviesList';
 import MyMovieDetail from '../components/MyMovieDetail/MyMovieDetail';
+import PersonDetail from '../components/PersonDetail/PersonDetail';
 import About from '../components/About/About';
 import Contact from '../components/Contact/Contact';
 import Footer from '../components/Footer/Footer';
@@ -50,6 +51,7 @@ const App = () => (
 					<Route exact path="/" render={MyMoviesList} />
 					<Route path="/about" component={About} />
 					<Route path="/contact" component={Contact} />
+					<Route path="/person/:id" component={PersonDetail} />
 					<Route path="/:mediaType/:id" render={MyMovieDetail} />
 				</Switch>
 				<Footer />

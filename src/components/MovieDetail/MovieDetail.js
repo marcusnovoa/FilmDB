@@ -29,7 +29,8 @@ class MovieDetail extends Component {
 			const movie = await res.json();
 			const castInfo = movie.credits.cast.map(member => ({
 				name: member.name,
-				image: member.profile_path
+				id: member.id,
+				image: member.profile_path,
 			}));
 			const videos = movie.videos.results.map(vid => ({
 				name: vid.name,
@@ -86,10 +87,41 @@ class MovieDetail extends Component {
 
 		return (
 			<Fragment>
+				{this.props.context.state.videoPlayer.playVideo ?
+					<div style={{
+						display: 'flex',
+						justifyContent: 'center',
+						alignItems: 'center',
+						position: 'fixed',
+						top: 0,
+						width: '100%',
+						height: '100%',
+						backgroundColor: 'rgba(0, 0, 0, 0.6)',
+						zIndex: 999
+					}}
+					onClick={this.props.context.closeVideo}>
+						<div style={{
+							display: 'flex',
+							justifyContent: 'flex-end',
+							width: '100%',
+							position: 'absolute',
+							top: 0
+						}}>
+							<i
+								className="material-icons white-text"
+								style={{ fontSize: '2rem', margin: '1rem 1rem 0 0', cursor: 'pointer' }}
+								onClick={this.props.context.closeVideo}>
+								close
+							</i>
+						</div>
+						<iframe
+							src={`http://www.youtube.com/embed/${this.props.context.state.videoPlayer.videoPath}?autoplay=1`}
+							width="90%" height="75%" frameBorder="0" title={`videoplayer-${this.props.match.params.id}`} allowFullScreen></iframe>
+					</div> : null
+				}
 				<MovieWrapper
 					className="MovieDetail"
-					backdrop={`${BACKDROP_PATH}${movie.backdrop_path}`}
-				>
+					backdrop={`${BACKDROP_PATH}${movie.backdrop_path}`}>
 					<div className="MovieInfo">
 						<div className="container">
 							<div className="row">
@@ -102,13 +134,13 @@ class MovieDetail extends Component {
 												alt={movie.title ? `${movie.title}` : `${movie.name}`}
 											/> :
 											<div className="card thumbnail grey darken-3 white-text"
-													 style={{
-														 width: '154px',
-														 height: '231px',
-														 display: 'flex',
-														 textAlign: 'center',
-														 justifyContent: 'center',
-														 alignItems: 'center' }}>
+												style={{
+													width: '154px',
+													height: '231px',
+													display: 'flex',
+													textAlign: 'center',
+													justifyContent: 'center',
+													alignItems: 'center' }}>
 												<p>{movie.title ? movie.title : movie.name}</p>
 											</div>
 										}
@@ -150,6 +182,7 @@ class MovieDetail extends Component {
 										key={member.image}
 										name={member.name}
 										path={member.image}
+										id={member.id}
 									/>
 								))}
 							</Slider>
@@ -164,7 +197,7 @@ class MovieDetail extends Component {
 							</h5>
 							<Slider {...videosSettings}>
 								{this.state.videos.map(vid => (
-									<VideoThumbnail key={vid.path} name={vid.name} url={vid.path} />
+									<VideoThumbnail key={vid.path} name={vid.name} url={vid.path} play={this.props.context.openVideo} />
 								))}
 							</Slider>
 						</div>
@@ -181,6 +214,7 @@ const MovieWrapper = styled.div`
 	background: url(${props => props.backdrop}) no-repeat;
 	background-size: cover;
 	background-position: center;
+	background-attachment: fixed;
 `;
 
 export default MovieDetail;

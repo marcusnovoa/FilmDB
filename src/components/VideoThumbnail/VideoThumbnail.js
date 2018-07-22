@@ -19,7 +19,8 @@ const videoThumbnail = props => (
 				position: 'relative',
 				justifyContent: 'center',
 				alignItems: 'center'
-			}}>
+			}}
+			onClick={props.play}>
 				<i
 					className="play-btn material-icons white-text"
 					style={{
