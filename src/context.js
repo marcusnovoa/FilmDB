@@ -25,7 +25,10 @@ export default class MyProvider extends Component {
 
 				this.setState({
 					pages: movies,
-					movies: movies.results
+					movies: movies.results,
+					videoPlayer: {
+						playVideo: false
+					}
 				});
 			} catch (err) {
 				console.log(err);
@@ -55,7 +58,10 @@ export default class MyProvider extends Component {
 
 								this.setState({
 									pages: movies,
-									movies: movies.results
+									movies: movies.results,
+									videoPlayer: {
+										playVideo: false
+									}
 								});
 							} catch (err) {
 								console.log(err);
