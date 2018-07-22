@@ -1,9 +1,11 @@
 import React, { Component, Fragment } from 'react';
 import Overdrive from 'react-overdrive';
 import styled from 'styled-components';
+import moment from 'moment';
 import './MovieDetail.css';
 
 import CastThumbnail from '../CastThumbnail/CastThumbnail';
+import VideoThumbnail from '../VideoThumbnail/VideoThumbnail';
 import Slider from '../../../node_modules/react-slick/lib/slider';
 import '../../../node_modules/slick-carousel/slick/slick.css';
 import '../../../node_modules/slick-carousel/slick/slick-theme.css';
@@ -14,7 +16,9 @@ const BACKDROP_PATH = 'https://image.tmdb.org/t/p/w1280';
 class MovieDetail extends Component {
 	state = {
 		movie: {},
-		castInfo: []
+		castInfo: [],
+		videos: [],
+		genresLength: false
 	};
 
 	async componentDidMount() {
@@ -27,10 +31,17 @@ class MovieDetail extends Component {
 				name: member.name,
 				image: member.profile_path
 			}));
+			const videos = movie.videos.results.map(vid => ({
+				name: vid.name,
+				path: vid.key
+			}));
+			const genresLength = movie.genres.length > 0;
 
 			this.setState({
 				movie,
-				castInfo
+				castInfo,
+				videos,
+				genresLength
 			});
 
 			this.getCastImages = () => {
@@ -44,25 +55,33 @@ class MovieDetail extends Component {
 
 		// Retrieve Movie Genres
 		const { movie } = this.state;
-		if (movie.genres) {
+		if (this.state.genresLength) {
 			const genres = Array.from(movie.genres);
 			const genreNames = genres.map(genre => {
 				return genre.name;
 			});
 			const genreString = genreNames.join(', ');
-			document.getElementById('genres').innerText = `Genres: ${genreString}`;
+			document.getElementById('genres').innerText = this.state.genresLength ? `Genres: ${genreString}` : null;
 		}
 	}
 
 	render() {
 		const { movie } = this.state;
 		const castInfoLength = this.state.castInfo.length >= 6 ? 6 : this.state.castInfo.length;
-		const settings = {
+		const videosLength = this.state.videos.length >= 3 ? 3 : this.state.videos.length;
+		const castSettings = {
 			dots: true,
 			infinite: true,
 			speed: 500,
 			slidesToShow: castInfoLength,
 			slidesToScroll: castInfoLength
+		};
+		const videosSettings = {
+			dots: true,
+			infinite: true,
+			speed: 500,
+			slidesToShow: videosLength,
+			slidesToScroll: videosLength
 		};
 
 		return (
@@ -104,13 +123,14 @@ class MovieDetail extends Component {
 										<p className="grey-text text-darken-2">
 											Release Date:{' '}
 											{movie.release_date
-												? movie.release_date
-												: movie.first_air_date}
+												? moment(movie.release_date).format('LL')
+												: moment(movie.first_air_date).format('LL')}
 										</p>
 										<p className="white-text">{movie.overview}</p>
 										<p
 											id="genres"
 											className="movie-genres grey-text text-darken-2"
+											style={{ marginTop: this.state.genresLength ? '15px' : 0 }}
 										/>
 									</div>
 								</div>
@@ -119,24 +139,32 @@ class MovieDetail extends Component {
 					</div>
 				</MovieWrapper>
 				<div className="MovieCast container">
-					<div className="row">
+					<div className="row slider-row">
 						<div className="col s12">
-							<h5
-								style={{
-									color: '#fff',
-									textAlign: 'center',
-									margin: '1rem 0 0 0'
-								}}
-							>
-								Cast List
+							<h5 className="slider-title">
+									Cast List
 							</h5>
-							<Slider {...settings}>
+							<Slider {...castSettings}>
 								{this.state.castInfo.map(member => (
 									<CastThumbnail
 										key={member.image}
 										name={member.name}
 										path={member.image}
 									/>
+								))}
+							</Slider>
+						</div>
+					</div>
+				</div>
+				<div className="VideosList container">
+					<div className="row slider-row">
+						<div className="col s12">
+							<h5 className="slider-title">
+								Videos
+							</h5>
+							<Slider {...videosSettings}>
+								{this.state.videos.map(vid => (
+									<VideoThumbnail key={vid.path} name={vid.name} url={vid.path} />
 								))}
 							</Slider>
 						</div>

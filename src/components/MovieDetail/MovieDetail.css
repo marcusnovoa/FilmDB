@@ -45,3 +45,11 @@
 @media screen and (min-width: 601px) and (max-width: 1800px) {
   .MovieDetail .col.m10 {
     margin-left: 1rem; } }
+
+.slider-title {
+  color: #fff;
+  text-align: center;
+  margin: 1rem 0 0 0; }
+
+.row.slider-row {
+  margin-bottom: 3rem; }
