@@ -57,7 +57,20 @@ const Movie = ({ movie }) => {
 							<i className="material-icons">star_rate</i>
 							<p>{`${movie.vote_average}`}</p>
 						</div>
-					</div> : null}
+					</div> : 
+				movie.media_type === 'person' ?
+					<div className="RatingCon">
+						<div className="Rating" style={{ backgroundColor: '#3498db' }}>
+							<i className="material-icons">person</i>
+						</div>
+					</div> :
+					<div className="RatingCon">
+						<div className="Rating" style={{ backgroundColor: bgColor }}>
+							<i className="material-icons">star_rate</i>
+							<p>0</p>
+						</div>
+					</div>
+				}
 			</Link>
 		</div>
 	);
