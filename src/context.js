@@ -17,7 +17,7 @@ export default class MyProvider extends Component {
 			const keyword = document.getElementById('search').value;
 			const url =
 				keyword === ''
-					? `https://api.themoviedb.org/3/discover/movie?api_key=${process.env.REACT_APP_THEMOVIEDB_API_KEY}&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=1`
+					? `https://api.themoviedb.org/3/discover/movie?api_key=${process.env.REACT_APP_THEMOVIEDB_API_KEY}&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=${this.state.pageNum}`
 					: `https://api.themoviedb.org/3/search/multi?api_key=${process.env.REACT_APP_THEMOVIEDB_API_KEY}&query=${this.state.keyword}&include_adult=false&page=${this.state.pageNum}`;
 			try {
 				const res = await fetch(url);
