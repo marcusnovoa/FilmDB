@@ -3,6 +3,7 @@ import './MoviesList.css';
 import ReactPaginate from 'react-paginate';
 
 import Movie from '../Movie/Movie';
+import MoviesListWrapper from '../MoviesListWrapper/MoviesListWrapper';
 
 class MoviesList extends Component {
 	componentDidMount() {
@@ -73,9 +74,9 @@ class MoviesList extends Component {
 						subContainerClassName={'pages pagination'}
 					/>
 				</div>
-				<div className="container movies">
+				<MoviesListWrapper>
 					{this.props.context.state.movies.map(movie => <Movie key={movie.id} movie={movie} /> )};
-				</div>
+				</MoviesListWrapper>
 			</div>
 		);
 	}

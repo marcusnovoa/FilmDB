@@ -3,7 +3,7 @@ import MovieDetail from '../MovieDetail/MovieDetail';
 
 import { MyContext } from '../../context';
 
-const MyMovieDetail = props => {
+const myMovieDetail = props => {
   return (
     <MyContext.Consumer>
       {context =>
@@ -13,4 +13,4 @@ const MyMovieDetail = props => {
   );
 }
 
-export default MyMovieDetail;
+export default myMovieDetail;

@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import lodash from 'lodash';
 
 // Context
 export const MyContext = React.createContext();
@@ -12,6 +13,13 @@ export default class MyProvider extends Component {
 		videoPlayer: {
 			playVideo: false,
 			videoPath: ''
+		},
+		personDetail: {
+			person: {},
+			castingChunked: [],
+			casting: [],
+			castingIndex: 0,
+			lastId: ''
 		},
 		fetchMovies: async () => {
 			const keyword = document.getElementById('search').value;
@@ -28,6 +36,46 @@ export default class MyProvider extends Component {
 					movies: movies.results,
 					videoPlayer: {
 						playVideo: false
+					}
+				});
+			} catch (err) {
+				console.log(err);
+			}
+		},
+		fetchPersonCasting: async cIndex => {
+			try {
+				const res = await fetch(
+					`http://api.themoviedb.org/3/person/${window.location.pathname.split('/')[2]}?api_key=${process.env.REACT_APP_THEMOVIEDB_API_KEY}&append_to_response=movie_credits,tv_credits`
+				);
+				const person = await res.json();
+				const castMovies = person.movie_credits.cast.map(mov => ({
+					id: mov.id,
+					title: mov.title,
+					poster_path: mov.poster_path,
+					vote_average: mov.vote_average,
+					release_date: mov.release_date,
+					media_type: 'movie'
+				}));
+				const castShows = person.tv_credits.cast.map(show => ({
+					id: show.id,
+					title: show.name,
+					poster_path: show.poster_path,
+					vote_average: show.vote_average,
+					release_date: show.first_air_date,
+					media_type: 'tv'
+				}));
+				let castingFull = castMovies.concat(castShows)
+					.sort(function(a,b) {return (a.release_date < b.release_date) ? 1 : ((b.release_date < a.release_date) ? -1 : 0)});
+				castingFull = lodash.uniqBy(castingFull, cast => cast.id);
+				const castingChunked = lodash.chunk(castingFull, 20);
+				const casting = castingChunked[cIndex];
+				
+				this.setState({
+					personDetail: {
+						...this.state.personDetail,
+						person,
+						castingChunked,
+						casting
 					}
 				});
 			} catch (err) {
@@ -104,6 +152,44 @@ export default class MyProvider extends Component {
 								});
 							} catch (err) {
 								console.log(err);
+							}
+						}
+					},
+					handlePersonPageClick: e => {
+						const castingIndex =  e ? 
+																		e.selected :
+																	this.state.personDetail.castingIndex ?
+																 		this.state.personDetail.castingIndex :
+																	0;
+						let lastId = window.location.pathname.split('/')[2];
+						if (this.state.personDetail.lastId === '') {
+							this.setState({
+								personDetail: {
+									...this.state.personDetail,
+									castingIndex,
+									lastId
+								}
+							});
+							this.state.fetchPersonCasting(castingIndex);
+						} else {
+							if (lastId === this.state.personDetail.lastId) {
+								this.setState({
+									personDetail: {
+										...this.state.personDetail,
+										castingIndex
+									}
+								});
+								this.state.fetchPersonCasting(castingIndex);
+							} else {
+								lastId = window.location.pathname.split('/')[2];
+								this.setState({
+									personDetail: {
+										...this.state.personDetail,
+										castingIndex: 0,
+										lastId
+									}
+								});
+								this.state.fetchPersonCasting(0);
 							}
 						}
 					},

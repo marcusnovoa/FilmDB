@@ -151,58 +151,73 @@ class MovieDetail extends Component {
 										<h4 className="movie-title white-text">
 											{movie.title ? movie.title : movie.name}
 										</h4>
-										<p className="movie-tagline white-text">{movie.tagline}</p>
-										<p className="grey-text text-darken-2">
-											Release Date:{' '}
-											{movie.release_date
-												? moment(movie.release_date).format('LL')
-												: moment(movie.first_air_date).format('LL')}
-										</p>
-										<p className="white-text">{movie.overview}</p>
-										<p
-											id="genres"
-											className="movie-genres grey-text text-darken-2"
-											style={{ marginTop: this.state.genresLength ? '15px' : 0 }}
-										/>
+										{movie.tagline ?
+											<p className="movie-tagline white-text">{movie.tagline}</p> : null
+										}
+										{movie.release_date || movie.first_air_date ?
+											<p
+												className="grey-text text-darken-2"
+												style={{
+													marginBottom: movie.overview || movie.genres.length > 0 ? '15px' : 0
+												}}>
+													Release Date:{' '}
+													{movie.release_date
+														? moment(movie.release_date).format('LL')
+														: moment(movie.first_air_date).format('LL')}
+											</p> : null
+										}
+										{movie.overview ?
+											<p className="white-text">{movie.overview}</p> : null
+										}
+										{this.state.genresLength ?
+											<p
+												id="genres"
+												className="movie-genres grey-text text-darken-2"
+											/> : null
+										}
 									</div>
 								</div>
 							</div>
 						</div>
 					</div>
 				</MovieWrapper>
-				<div className="MovieCast container">
-					<div className="row slider-row">
-						<div className="col s12">
-							<h5 className="slider-title">
-									Cast List
-							</h5>
-							<Slider {...castSettings}>
-								{this.state.castInfo.map(member => (
-									<CastThumbnail
-										key={member.image}
-										name={member.name}
-										path={member.image}
-										id={member.id}
-									/>
-								))}
-							</Slider>
+				{this.state.castInfo.length > 0 ?
+					<div className="MovieCast container">
+						<div className="row slider-row">
+							<div className="col s12">
+								<h5 className="slider-title">
+										Cast List
+								</h5>
+								<Slider {...castSettings}>
+									{this.state.castInfo.map(member => (
+										<CastThumbnail
+											key={member.image}
+											name={member.name}
+											path={member.image}
+											id={member.id}
+										/>
+									))}
+								</Slider>
+							</div>
 						</div>
-					</div>
-				</div>
-				<div className="VideosList container">
-					<div className="row slider-row">
-						<div className="col s12">
-							<h5 className="slider-title">
-								Videos
-							</h5>
-							<Slider {...videosSettings}>
-								{this.state.videos.map(vid => (
-									<VideoThumbnail key={vid.path} name={vid.name} url={vid.path} play={this.props.context.openVideo} />
-								))}
-							</Slider>
+					</div> : null
+				}
+				{this.state.videos.length > 0 ?
+					<div className="VideosList container">
+						<div className="row slider-row">
+							<div className="col s12">
+								<h5 className="slider-title">
+									Videos
+								</h5>
+								<Slider {...videosSettings}>
+									{this.state.videos.map(vid => (
+										<VideoThumbnail key={vid.path} name={vid.name} url={vid.path} play={this.props.context.openVideo} />
+									))}
+								</Slider>
+							</div>
 						</div>
-					</div>
-				</div>
+					</div> : null
+				}
 			</Fragment>
 		);
 	}
