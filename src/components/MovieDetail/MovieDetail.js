@@ -4,6 +4,7 @@ import styled from 'styled-components';
 import moment from 'moment';
 import './MovieDetail.css';
 
+import MovieRating from '../MovieRating/MovieRating';
 import CastThumbnail from '../CastThumbnail/CastThumbnail';
 import VideoThumbnail from '../VideoThumbnail/VideoThumbnail';
 import Slider from '../../../node_modules/react-slick/lib/slider';
@@ -125,7 +126,7 @@ class MovieDetail extends Component {
 					<div className="MovieInfo">
 						<div className="container">
 							<div className="row">
-								<div className="col s12 m2">
+								<div className="col s12 m2" style={{ height: '256px', position: 'relative' }}>
 									<Overdrive id={`${movie.id}`}>
 										{movie.poster_path ?
 											<img
@@ -144,6 +145,9 @@ class MovieDetail extends Component {
 												<p>{movie.title ? movie.title : movie.name}</p>
 											</div>
 										}
+									</Overdrive>
+									<Overdrive id={`${movie.id}-rating`} style={{ width: '154px', position: 'absolute', bottom: 0 }}>
+										<MovieRating movie={movie}/>
 									</Overdrive>
 								</div>
 								<div className="col s12 m10">

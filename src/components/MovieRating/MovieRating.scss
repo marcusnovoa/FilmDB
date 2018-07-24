@@ -1,0 +1,28 @@
+.RatingCon {
+  display: flex;
+  justify-content: center;
+  // width: 100%;
+  // position: absolute;
+  // bottom: -25px;
+  .Rating {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    border-radius: 2px;
+    padding: 0.25rem;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.6);
+    -webkit-box-shadow: 0 0 20px rgba(0, 0, 0, 0.6);
+    .material-icons {
+      color: #fff;
+      width: 22px;
+      font-size: 1.3rem;
+    }
+    p {
+      font-size: 1rem;
+      padding-right: 0.25rem;
+      margin: 0;
+      color: #fff;
+    }
+  }
+}

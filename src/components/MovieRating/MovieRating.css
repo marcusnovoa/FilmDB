@@ -1,0 +1,21 @@
+.RatingCon {
+  display: flex;
+  justify-content: center; }
+  .RatingCon .Rating {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    border-radius: 2px;
+    padding: 0.25rem;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.6);
+    -webkit-box-shadow: 0 0 20px rgba(0, 0, 0, 0.6); }
+    .RatingCon .Rating .material-icons {
+      color: #fff;
+      width: 22px;
+      font-size: 1.3rem; }
+    .RatingCon .Rating p {
+      font-size: 1rem;
+      padding-right: 0.25rem;
+      margin: 0;
+      color: #fff; }
