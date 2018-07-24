@@ -7,7 +7,7 @@ import MoviesListWrapper from '../MoviesListWrapper/MoviesListWrapper';
 
 class MoviesList extends Component {
 	componentDidMount() {
-		this.props.context.state.fetchMovies();
+		this.props.context.fetchMovies();
 
 		if (this.props.context.state.keyword !== '') {
 			document.getElementById('search-label').classList.add('active');

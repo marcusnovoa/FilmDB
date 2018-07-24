@@ -20,74 +20,76 @@ export default class MyProvider extends Component {
 			casting: [],
 			castingIndex: 0,
 			lastId: ''
-		},
-		fetchMovies: async () => {
-			const keyword = document.getElementById('search').value;
-			const url =
-				keyword === ''
-					? `https://api.themoviedb.org/3/discover/movie?api_key=${process.env.REACT_APP_THEMOVIEDB_API_KEY}&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=${this.state.pageNum}`
-					: `https://api.themoviedb.org/3/search/multi?api_key=${process.env.REACT_APP_THEMOVIEDB_API_KEY}&query=${this.state.keyword}&include_adult=false&page=${this.state.pageNum}`;
-			try {
-				const res = await fetch(url);
-				const movies = await res.json();
-
-				this.setState({
-					pages: movies,
-					movies: movies.results,
-					videoPlayer: {
-						playVideo: false
-					}
-				});
-			} catch (err) {
-				console.log(err);
-			}
-		},
-		fetchPersonCasting: async cIndex => {
-			try {
-				const res = await fetch(
-					`http://api.themoviedb.org/3/person/${window.location.pathname.split('/')[2]}?api_key=${process.env.REACT_APP_THEMOVIEDB_API_KEY}&append_to_response=movie_credits,tv_credits`
-				);
-				const person = await res.json();
-				const castMovies = person.movie_credits.cast.map(mov => ({
-					id: mov.id,
-					title: mov.title,
-					poster_path: mov.poster_path,
-					vote_average: mov.vote_average,
-					release_date: mov.release_date,
-					media_type: 'movie'
-				}));
-				const castShows = person.tv_credits.cast.map(show => ({
-					id: show.id,
-					title: show.name,
-					poster_path: show.poster_path,
-					vote_average: show.vote_average,
-					release_date: show.first_air_date,
-					media_type: 'tv'
-				}));
-				let castingFull = castMovies.concat(castShows)
-					.sort(function(a,b) {return (a.release_date < b.release_date) ? 1 : ((b.release_date < a.release_date) ? -1 : 0)});
-				castingFull = lodash.uniqBy(castingFull, cast => cast.id);
-				const castingChunked = lodash.chunk(castingFull, 20);
-				const casting = castingChunked[cIndex];
-				
-				this.setState({
-					personDetail: {
-						...this.state.personDetail,
-						person,
-						castingChunked,
-						casting
-					}
-				});
-			} catch (err) {
-				console.log(err);
-			}
 		}
 	};
+	fetchMovies = async () => {
+		const keyword = document.getElementById('search').value;
+		const url =
+			keyword === ''
+				? `https://api.themoviedb.org/3/discover/movie?api_key=${process.env.REACT_APP_THEMOVIEDB_API_KEY}&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=${this.state.pageNum}`
+				: `https://api.themoviedb.org/3/search/multi?api_key=${process.env.REACT_APP_THEMOVIEDB_API_KEY}&query=${this.state.keyword}&include_adult=false&page=${this.state.pageNum}`;
+		try {
+			const res = await fetch(url);
+			const movies = await res.json();
+
+			this.setState({
+				pages: movies,
+				movies: movies.results,
+				videoPlayer: {
+					playVideo: false
+				}
+			});
+		} catch (err) {
+			console.log(err);
+		}
+	}
+	fetchPersonCasting = async cIndex => {
+		try {
+			const res = await fetch(
+				`http://api.themoviedb.org/3/person/${window.location.pathname.split('/')[2]}?api_key=${process.env.REACT_APP_THEMOVIEDB_API_KEY}&append_to_response=movie_credits,tv_credits`
+			);
+			const person = await res.json();
+			const castMovies = person.movie_credits.cast.map(mov => ({
+				id: mov.id,
+				title: mov.title,
+				poster_path: mov.poster_path,
+				vote_average: mov.vote_average,
+				release_date: mov.release_date,
+				media_type: 'movie'
+			}));
+			const castShows = person.tv_credits.cast.map(show => ({
+				id: show.id,
+				title: show.name,
+				poster_path: show.poster_path,
+				vote_average: show.vote_average,
+				release_date: show.first_air_date,
+				media_type: 'tv'
+			}));
+			let castingFull = castMovies.concat(castShows)
+				.sort(function(a,b) {return (a.release_date < b.release_date) ? 1 : ((b.release_date < a.release_date) ? -1 : 0)});
+			castingFull = lodash.uniqBy(castingFull, cast => cast.id);
+			const castingChunked = lodash.chunk(castingFull, 20);
+			const casting = castingChunked[cIndex];
+			
+			this.setState({
+				personDetail: {
+					...this.state.personDetail,
+					person,
+					castingChunked,
+					casting
+				}
+			});
+		} catch (err) {
+			console.log(err);
+		}
+	}
 	render() {
 		return (
 			<MyContext.Provider
 				value={{
 					state: this.state,
+					fetchMovies: this.fetchMovies,
+					fetchPersonCasting: this.fetchPersonCasting,
 					keywordSearch: async () => {
 						this.setState({ pageNum: 1 });
 						const keyword = document.getElementById('search').value;
@@ -115,7 +117,7 @@ export default class MyProvider extends Component {
 								console.log(err);
 							}
 						} else {
-							this.state.fetchMovies();
+							this.fetchMovies();
 						}
 					},
 					handlePageClick: async e => {
@@ -170,7 +172,7 @@ export default class MyProvider extends Component {
 									lastId
 								}
 							});
-							this.state.fetchPersonCasting(castingIndex);
+							this.fetchPersonCasting(castingIndex);
 						} else {
 							if (lastId === this.state.personDetail.lastId) {
 								this.setState({
@@ -179,7 +181,7 @@ export default class MyProvider extends Component {
 										castingIndex
 									}
 								});
-								this.state.fetchPersonCasting(castingIndex);
+								this.fetchPersonCasting(castingIndex);
 							} else {
 								lastId = window.location.pathname.split('/')[2];
 								this.setState({
@@ -189,7 +191,7 @@ export default class MyProvider extends Component {
 										lastId
 									}
 								});
-								this.state.fetchPersonCasting(0);
+								this.fetchPersonCasting(0);
 							}
 						}
 					},
