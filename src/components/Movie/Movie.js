@@ -21,12 +21,20 @@ const Movie = props => {
 					{props.movie.poster_path ?
 						<img
 							className="card thumbnail"
+							style={{
+								width: '154px',
+								maxHeight: '231px'
+							}}
 							src={`${POSTER_PATH}${props.movie.poster_path}`}
 							alt={props.movie.title ? `${props.movie.title}` : `${props.movie.name}`}
 						/> :
 					props.movie.profile_path ?
 						<img
 							className="card thumbnail"
+							style={{
+								width: '154px',
+								maxHeight: '231px'
+							}}
 							src={`${POSTER_PATH}${props.movie.profile_path}`}
 							alt={props.movie.name}
 						/> :
