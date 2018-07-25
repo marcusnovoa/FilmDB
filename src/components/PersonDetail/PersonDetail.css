@@ -1,0 +1,21 @@
+.PersonInfo {
+  margin: 3rem 0;
+  position: relative;
+  display: flex; }
+  .PersonInfo img {
+    position: relative; }
+  .PersonInfo .container .row {
+    margin-bottom: 0;
+    display: flex; }
+    @media screen and (max-width: 600px) {
+      .PersonInfo .container .row {
+        flex-direction: column; } }
+    @media screen and (max-width: 600px) {
+      .PersonInfo .container .row .col.profile {
+        text-align: center; } }
+    @media screen and (min-width: 601px) {
+      .PersonInfo .container .row .col.profile {
+        width: auto; } }
+    @media screen and (min-width: 601px) {
+      .PersonInfo .container .row .col.bio {
+        margin-left: 1rem; } }

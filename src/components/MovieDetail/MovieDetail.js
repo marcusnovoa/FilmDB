@@ -27,6 +27,7 @@ class MovieDetail extends Component {
 	}
 
 	async componentDidMount() {
+		window.scrollTo(0, 0);
 		try {
 			const res = await fetch(
 				`https://api.themoviedb.org/3/${this.props.match.params.mediaType}/${this.props.match.params.id}?api_key=${process.env.REACT_APP_THEMOVIEDB_API_KEY}&language=en-US&include_adult=false&append_to_response=credits,videos`
@@ -128,7 +129,7 @@ class MovieDetail extends Component {
 				}
 				<MovieWrapper
 					className="MovieDetail"
-					backdrop={`${BACKDROP_PATH}${movie.backdrop_path}`}>
+					backdrop={movie.backdrop_path ? `${BACKDROP_PATH}${movie.backdrop_path}` : null}>
 					<div className="MovieInfo">
 						<div className="container">
 							<div className="row">
