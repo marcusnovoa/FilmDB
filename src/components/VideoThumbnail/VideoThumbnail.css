@@ -8,4 +8,4 @@
   -webkit-text-shadow: 0 0 10px #000; }
 
 .VideoThumbnail .video-con:hover .play-btn {
-  display: block; }
+  display: flex; }

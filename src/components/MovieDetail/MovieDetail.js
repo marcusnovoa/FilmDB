@@ -30,6 +30,7 @@ class MovieDetail extends Component {
 			const movie = await res.json();
 			const castInfo = movie.credits.cast.map(member => ({
 				name: member.name,
+				character: member.character,
 				id: member.id,
 				image: member.profile_path,
 			}));
@@ -197,6 +198,7 @@ class MovieDetail extends Component {
 										<CastThumbnail
 											key={member.image}
 											name={member.name}
+											character={member.character}
 											path={member.image}
 											id={member.id}
 										/>

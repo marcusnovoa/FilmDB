@@ -14,16 +14,15 @@ const videoThumbnail = props => (
 	>
 		<div
 			className="video-con"
-			style={{
-				display: 'flex',
-				position: 'relative',
-				justifyContent: 'center',
-				alignItems: 'center'
-			}}
+			style={{ position: 'relative' }}
 			onClick={props.play}>
 				<i
 					className="play-btn material-icons white-text"
 					style={{
+						width: '100%',
+						height: '100%',
+						justifyContent: 'center',
+						alignItems: 'center',
 						position: 'absolute',
 						margin: 0,
 						zIndex: 2
