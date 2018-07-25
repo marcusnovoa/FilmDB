@@ -22,6 +22,10 @@ class MovieDetail extends Component {
 		genresLength: false
 	};
 
+	componentWillUnmount() {
+		this.props.context.closeVideo();
+	}
+
 	async componentDidMount() {
 		try {
 			const res = await fetch(
