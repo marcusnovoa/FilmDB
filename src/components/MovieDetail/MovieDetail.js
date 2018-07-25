@@ -90,6 +90,7 @@ class MovieDetail extends Component {
 			slidesToShow: videosLength,
 			slidesToScroll: videosLength
 		};
+		const isIE = !!navigator.userAgent.match(/Trident/g) || !!navigator.userAgent.match(/MSIE/g);
 
 		return (
 			<Fragment>
@@ -109,7 +110,7 @@ class MovieDetail extends Component {
 						<div style={{
 							display: 'flex',
 							justifyContent: 'flex-end',
-							width: '100%',
+							width: isIE ? '95%' : '100%',
 							position: 'absolute',
 							top: 0
 						}}>
