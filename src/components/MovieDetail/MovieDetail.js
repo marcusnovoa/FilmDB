@@ -82,14 +82,62 @@ class MovieDetail extends Component {
 			infinite: true,
 			speed: 500,
 			slidesToShow: castInfoLength,
-			slidesToScroll: castInfoLength
+			slidesToScroll: castInfoLength,
+			swipeToSlide: true,
+			responsive: [
+				{
+					breakpoint: 992,
+					settings: {
+						slidesToShow: 4,
+						slidesToScroll: 4
+					}
+				},
+				{
+					breakpoint: 768,
+					settings: {
+						slidesToShow: 3,
+						slidesToScroll: 3
+					}
+				},
+				{
+					breakpoint: 480,
+					settings: {
+						slidesToShow: 2,
+						slidesToScroll: 2
+					}
+				},
+				{
+					breakpoint: 384,
+					settings: {
+						slidesToShow: 1,
+						slidesToScroll: 1
+					}
+				}
+			]
 		};
 		const videosSettings = {
 			dots: true,
 			infinite: true,
 			speed: 500,
 			slidesToShow: videosLength,
-			slidesToScroll: videosLength
+			slidesToScroll: videosLength,
+			swipeToSlide: true,
+			responsive: [
+				{
+					breakpoint: 880,
+					settings: {
+						slidesToShow: 2,
+						slidesToScroll: 2
+					}
+				},
+				{
+					breakpoint: 550,
+					settings: {
+						slidesToShow: 1,
+						slidesToScroll: 1
+					}
+				}
+			]
 		};
 		const isIE = !!navigator.userAgent.match(/Trident/g) || !!navigator.userAgent.match(/MSIE/g);
 
