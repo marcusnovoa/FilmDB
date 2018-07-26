@@ -177,7 +177,8 @@ class MovieDetail extends Component {
 				}
 				<MovieWrapper
 					className="MovieDetail"
-					backdrop={movie.backdrop_path ? `${BACKDROP_PATH}${movie.backdrop_path}` : null}>
+					backdrop={movie.backdrop_path ? `${BACKDROP_PATH}${movie.backdrop_path}` : null}
+					style={{ paddingTop: movie.backdrop_path ? '50vh' : '5rem' }}>
 					<div className="MovieInfo">
 						<div className="container">
 							<div className="row">
@@ -285,7 +286,6 @@ class MovieDetail extends Component {
 
 const MovieWrapper = styled.div`
 	position: relative;
-	padding-top: 50vh;
 	background: url(${props => props.backdrop}) no-repeat;
 	background-size: cover;
 	background-position: center;
