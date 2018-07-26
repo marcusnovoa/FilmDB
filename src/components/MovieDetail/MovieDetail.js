@@ -178,7 +178,7 @@ class MovieDetail extends Component {
 				<MovieWrapper
 					className="MovieDetail"
 					backdrop={movie.backdrop_path ? `${BACKDROP_PATH}${movie.backdrop_path}` : null}
-					style={{ paddingTop: movie.backdrop_path ? '50vh' : '5rem' }}>
+					style={{ paddingTop: movie.backdrop_path ? '50vh' : '6rem' }}>
 					<div className="MovieInfo">
 						<div className="container">
 							<div className="row">

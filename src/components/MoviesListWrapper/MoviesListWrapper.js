@@ -1,9 +1,13 @@
 import React from 'react';
-import './MoviesListWrapper.css';
 
 const moviesListWrapper = props => {
   return (
-    <div className="container movies">
+    <div
+      className="container"
+      style={{
+        display: 'flex',
+        flexWrap: 'wrap'
+      }}>
       {props.children}
     </div>
   )

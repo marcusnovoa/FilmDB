@@ -90,7 +90,7 @@ class PersonDetail extends Component {
 						width: '100%',
 						display: 'flex',
 						justifyContent: 'center',
-						marginBottom: '3rem'
+						margin: '4rem 0'
 					}}>
           <ReactPaginate
             activeClassName={'active'}
@@ -109,7 +109,7 @@ class PersonDetail extends Component {
           />
         </div>
         {this.props.context.state.personDetail.casting ?
-          <h5 className="slider-title" style={{ marginBottom: '2rem' }}>
+          <h5 className="slider-title" style={{ margin: '0 0 2rem 0' }}>
             Casting Roles
           </h5> : null
         }

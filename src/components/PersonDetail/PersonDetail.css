@@ -1,5 +1,5 @@
 .PersonInfo {
-  margin: 3rem 0;
+  margin-top: 4rem;
   position: relative;
   display: flex; }
   .PersonInfo img {
@@ -19,3 +19,6 @@
     @media screen and (min-width: 601px) {
       .PersonInfo .container .row .col.bio {
         margin-left: 1rem; } }
+
+.pagination {
+  margin: 0; }

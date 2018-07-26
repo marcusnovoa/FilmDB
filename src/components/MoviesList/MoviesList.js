@@ -55,7 +55,7 @@ class MoviesList extends Component {
 						width: '100%',
 						display: 'flex',
 						justifyContent: 'center',
-						marginBottom: '3rem'
+						margin: '2rem 0 4rem 0'
 					}}
 				>
 					<ReactPaginate
