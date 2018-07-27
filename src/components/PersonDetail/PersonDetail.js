@@ -17,6 +17,9 @@ class PersonDetail extends Component {
 
   render() {
     const person = this.props.context.state.personDetail.person;
+    const ageBirth = moment().diff(person.birthday, 'years');
+    const deathDay = person.deathday ? moment(person.deathday) : null;
+    const ageDeath = person.deathday ? deathDay.diff(person.birthday, 'years') : null;
     return (
       <Fragment>
         <div className="PersonInfo">
@@ -43,7 +46,7 @@ class PersonDetail extends Component {
                         textAlign: 'center',
                         justifyContent: 'center',
                         alignItems: 'center' }}>
-                      <p>{person.name}</p>
+                      <p style={{ margin: '0 .5rem' }}>{person.name}</p>
                     </div>
                   }
                 </Overdrive>
@@ -67,14 +70,23 @@ class PersonDetail extends Component {
                       {`Born In: ${person.place_of_birth}`}
                     </p> : null
                   }
-                  {person.birthday ?
+                  {person.deathday ?
+                    <p
+                      className="grey-text text-darken-2"
+                      style={{
+                        marginBottom: person.biography ? '15px' : 0
+                      }}>
+                        Lived:{' '}
+                        {`${moment(person.birthday).format('LL')} - ${moment(person.deathday).format('LL')} (Age ${ageDeath})`}
+                    </p> :
+                  person.birthday ?
                     <p
                       className="grey-text text-darken-2"
                       style={{
                         marginBottom: person.biography ? '15px' : 0
                       }}>
                         Birthday:{' '}
-                        {moment(person.birthday).format('LL')}
+                        {`${moment(person.birthday).format('LL')} (Age ${ageBirth})`}
                     </p> : null
                   }
                   {person.biography ?

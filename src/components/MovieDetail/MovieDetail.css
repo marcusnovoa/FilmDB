@@ -46,6 +46,12 @@
   .MovieDetail .col.m10 {
     margin-left: 1rem; } }
 
+.cast-slider .slick-track {
+  padding-top: 2rem; }
+
+.video-slider .slick-track {
+  padding: 2rem 0; }
+
 .slider-title {
   color: #fff;
   text-align: center;

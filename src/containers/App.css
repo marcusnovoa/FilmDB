@@ -14,8 +14,8 @@
 .App .row.inner {
   margin: 0; }
 
-.App .slick-list {
-  padding: 2rem 0; }
+.App .slick-dots {
+  position: initial; }
 
 .App .slick-dots li button:before {
   font-size: 8px; }

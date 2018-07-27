@@ -75,39 +75,27 @@ class MovieDetail extends Component {
 
 	render() {
 		const { movie } = this.state;
-		const castInfoLength = this.state.castInfo.length >= 6 ? 6 : this.state.castInfo.length;
+		const castInfoLength = this.state.castInfo.length >= 3 ? 3 : this.state.castInfo.length;
 		const videosLength = this.state.videos.length >= 3 ? 3 : this.state.videos.length;
 		const castSettings = {
 			dots: true,
+			className: 'cast-slider',
 			infinite: true,
 			speed: 500,
 			slidesToShow: castInfoLength,
 			slidesToScroll: castInfoLength,
+			slidesPerRow: this.state.castInfo.length > 3 ? 2 : 1,
 			swipeToSlide: true,
 			responsive: [
 				{
-					breakpoint: 992,
-					settings: {
-						slidesToShow: 4,
-						slidesToScroll: 4
-					}
-				},
-				{
-					breakpoint: 768,
-					settings: {
-						slidesToShow: 3,
-						slidesToScroll: 3
-					}
-				},
-				{
-					breakpoint: 480,
+					breakpoint: 1200,
 					settings: {
 						slidesToShow: 2,
 						slidesToScroll: 2
 					}
 				},
 				{
-					breakpoint: 384,
+					breakpoint: 768,
 					settings: {
 						slidesToShow: 1,
 						slidesToScroll: 1
@@ -117,6 +105,7 @@ class MovieDetail extends Component {
 		};
 		const videosSettings = {
 			dots: true,
+			className: 'video-slider',
 			infinite: true,
 			speed: 500,
 			slidesToShow: videosLength,
@@ -246,7 +235,7 @@ class MovieDetail extends Component {
 						<div className="row slider-row">
 							<div className="col s12">
 								<h5 className="slider-title">
-										Cast List
+									Cast List
 								</h5>
 								<Slider {...castSettings}>
 									{this.state.castInfo.map(member => (

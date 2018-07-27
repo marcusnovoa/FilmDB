@@ -46,7 +46,7 @@ const Movie = props => {
 								textAlign: 'center',
 								justifyContent: 'center',
 								alignItems: 'center' }}>
-							<p>{props.movie.title ? props.movie.title : props.movie.name}</p>
+							<p style={{ margin: '0 .5rem' }}>{props.movie.title ? props.movie.title : props.movie.name}</p>
 						</div>
 					}
 				</Overdrive>
