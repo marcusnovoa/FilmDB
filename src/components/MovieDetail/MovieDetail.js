@@ -90,8 +90,8 @@ class MovieDetail extends Component {
 				{
 					breakpoint: 1200,
 					settings: {
-						slidesToShow: 2,
-						slidesToScroll: 2
+						slidesToShow: this.state.castInfo.length > 1 ? 2 : 1,
+						slidesToScroll: this.state.castInfo.length > 1 ? 2 : 1
 					}
 				},
 				{
@@ -115,8 +115,8 @@ class MovieDetail extends Component {
 				{
 					breakpoint: 880,
 					settings: {
-						slidesToShow: 2,
-						slidesToScroll: 2
+						slidesToShow: this.state.videos.length > 1 ? 2 : 1,
+						slidesToScroll: this.state.videos.length > 1 ? 2 : 1
 					}
 				},
 				{
