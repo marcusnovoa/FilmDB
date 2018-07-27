@@ -17,7 +17,7 @@ class PersonDetail extends Component {
 
   render() {
     const person = this.props.context.state.personDetail.person;
-    const ageBirth = moment().diff(person.birthday, 'years');
+    const ageBirth = person.birthday ? moment().diff(person.birthday, 'years') : null;
     const deathDay = person.deathday ? moment(person.deathday) : null;
     const ageDeath = person.deathday ? deathDay.diff(person.birthday, 'years') : null;
     return (
@@ -70,7 +70,7 @@ class PersonDetail extends Component {
                       {`Born In: ${person.place_of_birth}`}
                     </p> : null
                   }
-                  {person.deathday ?
+                  {person.deathday && person.birthday ?
                     <p
                       className="grey-text text-darken-2"
                       style={{
@@ -78,6 +78,15 @@ class PersonDetail extends Component {
                       }}>
                         Lived:{' '}
                         {`${moment(person.birthday).format('LL')} - ${moment(person.deathday).format('LL')} (Age ${ageDeath})`}
+                    </p> :
+                  person.deathday ?
+                    <p
+                      className="grey-text text-darken-2"
+                      style={{
+                        marginBottom: person.biography ? '15px' : 0
+                      }}>
+                        Died:{' '}
+                        {moment(person.deathday).format('LL')}
                     </p> :
                   person.birthday ?
                     <p
