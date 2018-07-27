@@ -47,24 +47,31 @@ const castThumbnail = props => (
           style={{
             margin: '0 1rem',
             minHeight: '138px',
+            position: 'relative'
+          }}>
+          <div style={{
+            width: '100%',
+            height: '100%',
+            position: 'absolute',
             display: 'flex',
             flexDirection: 'column',
             justifyContent: 'center',
             alignItems: 'center'
           }}>
-          <p style={{
-            textAlign: 'center',
-            fontWeight: 500,
-            margin: '0 .5rem'
-          }}>{props.name}</p>
-          {props.character ?
             <p style={{
               textAlign: 'center',
-              fontWeight: 300,
-              fontStyle: 'italic',
+              fontWeight: 500,
               margin: '0 .5rem'
-            }}>as {props.character}</p>
-          : null }
+            }}>{props.name}</p>
+            {props.character ?
+              <p style={{
+                textAlign: 'center',
+                fontWeight: 300,
+                fontStyle: 'italic',
+                margin: '0 .5rem'
+              }}>as {props.character}</p>
+            : null }
+          </div>
         </div>
       </Link>
     )}
