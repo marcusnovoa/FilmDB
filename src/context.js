@@ -22,11 +22,12 @@ export default class MyProvider extends Component {
 			lastId: ''
 		}
 	};
-	fetchMovies = async () => {
+	fetchMovies = async pageReset => {
 		const keyword = document.getElementById('search').value;
+		const pageNum = pageReset ? pageReset : this.state.pageNum;
 		const url =
 			keyword === ''
-				? `https://api.themoviedb.org/3/discover/movie?api_key=${process.env.REACT_APP_THEMOVIEDB_API_KEY}&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=${this.state.pageNum}`
+				? `https://api.themoviedb.org/3/discover/movie?api_key=${process.env.REACT_APP_THEMOVIEDB_API_KEY}&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=${pageNum}`
 				: `https://api.themoviedb.org/3/search/multi?api_key=${process.env.REACT_APP_THEMOVIEDB_API_KEY}&query=${this.state.keyword}&include_adult=false&page=${this.state.pageNum}`;
 		try {
 			const res = await fetch(url);
@@ -67,7 +68,7 @@ export default class MyProvider extends Component {
 			castingFull = lodash.uniqBy(castingFull, cast => cast.id);
 			const castingChunked = lodash.chunk(castingFull, 20);
 			const casting = castingChunked[cIndex];
-			
+
 			this.setState({
 				personDetail: {
 					...this.state.personDetail,
@@ -111,7 +112,7 @@ export default class MyProvider extends Component {
 								console.log(err);
 							}
 						} else {
-							this.fetchMovies();
+							this.fetchMovies(1);
 						}
 					},
 					handlePageClick: async e => {
@@ -152,7 +153,7 @@ export default class MyProvider extends Component {
 						}
 					},
 					handlePersonPageClick: e => {
-						const castingIndex =  e ? 
+						const castingIndex =  e ?
 																		e.selected :
 																	this.state.personDetail.castingIndex ?
 																 		this.state.personDetail.castingIndex :
