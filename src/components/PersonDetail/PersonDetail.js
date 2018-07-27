@@ -20,6 +20,7 @@ class PersonDetail extends Component {
     const ageBirth = person.birthday ? moment().diff(person.birthday, 'years') : null;
     const deathDay = person.deathday ? moment(person.deathday) : null;
     const ageDeath = person.deathday ? deathDay.diff(person.birthday, 'years') : null;
+    const placeBirth = person.place_of_birth ? person.place_of_birth.includes(' - ') ? person.place_of_birth.replace(/ - /g, ', ') : person.place_of_birth : null;
     return (
       <Fragment>
         <div className="PersonInfo">
@@ -67,7 +68,7 @@ class PersonDetail extends Component {
                   </h4>
                   {person.place_of_birth ?
                     <p className="movie-tagline white-text">
-                      {`Born In: ${person.place_of_birth}`}
+                      {`Born In: ${placeBirth}`}
                     </p> : null
                   }
                   {person.deathday && person.birthday ?
