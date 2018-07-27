@@ -18,8 +18,7 @@ class MovieDetail extends Component {
 	state = {
 		movie: {},
 		castInfo: [],
-		videos: [],
-		genresLength: false
+		videos: []
 	};
 
 	componentWillUnmount() {
@@ -43,13 +42,11 @@ class MovieDetail extends Component {
 				name: vid.name,
 				path: vid.key
 			}));
-			const genresLength = movie.genres.length > 0;
 
 			this.setState({
 				movie,
 				castInfo,
-				videos,
-				genresLength
+				videos
 			});
 
 			this.getCastImages = () => {
@@ -63,13 +60,13 @@ class MovieDetail extends Component {
 
 		// Retrieve Movie Genres
 		const { movie } = this.state;
-		if (this.state.genresLength) {
+		if (movie.genres.length > 0) {
 			const genres = Array.from(movie.genres);
 			const genreNames = genres.map(genre => {
 				return genre.name;
 			});
 			const genreString = genreNames.join(', ');
-			document.getElementById('genres').innerText = this.state.genresLength ? `Genres: ${genreString}` : null;
+			document.getElementById('genres').innerText = `Genres: ${genreString}`;
 		}
 	}
 
@@ -218,10 +215,11 @@ class MovieDetail extends Component {
 										{movie.overview ?
 											<p className="white-text">{movie.overview}</p> : null
 										}
-										{this.state.genresLength ?
+										{movie.genres ?
 											<p
 												id="genres"
 												className="movie-genres grey-text text-darken-2"
+												style={{ marginTop: movie.genres.length > 0 ? '15px' : 0 }}
 											/> : null
 										}
 									</div>
