@@ -84,7 +84,7 @@ class MovieDetail extends Component {
 			speed: 500,
 			slidesToShow: castInfoLength,
 			slidesToScroll: castInfoLength,
-			slidesPerRow: this.state.castInfo.length > 3 ? 2 : 1,
+			slidesPerRow: this.state.castInfo.length > 5 ? 2 : 1,
 			swipeToSlide: true,
 			responsive: [
 				{
