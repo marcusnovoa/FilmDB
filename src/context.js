@@ -108,6 +108,7 @@ export default class MyProvider extends Component {
 					keywordSearch: async () => {
 						const keyword = document.getElementById('search').value;
 						const url = `https://api.themoviedb.org/3/search/multi?api_key=${process.env.REACT_APP_THEMOVIEDB_API_KEY}&query=${keyword}&include_adult=false&page=1`;
+						this.isLoading();
 
 						this.setState({
 							pageNum: 1,
@@ -125,6 +126,8 @@ export default class MyProvider extends Component {
 									pages: movies,
 									movies: moviesArr
 								});
+
+								this.doneLoading();
 							} catch (err) {
 								console.log(err);
 							}
