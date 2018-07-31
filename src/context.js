@@ -10,6 +10,8 @@ export default class MyProvider extends Component {
 		movies: [],
 		pageNum: 1,
 		keyword: '',
+		isLoading: true,
+		windowLoading: true,
 		videoPlayer: {
 			playVideo: false,
 			videoPath: ''
@@ -22,7 +24,12 @@ export default class MyProvider extends Component {
 			lastId: ''
 		}
 	};
+	isLoading = () => this.setState({ isLoading: true });
+	doneLoading = async () => this.setState({ isLoading: await false });
+	windowIsLoading = () => this.setState({ windowLoading: true });
+	windowDoneLoading = async () => this.setState({ windowLoading: await false });
 	fetchMovies = async pageReset => {
+		this.isLoading();
 		const keyword = document.getElementById('search').value;
 		const pageNum = pageReset ? pageReset : this.state.pageNum;
 		const url =
@@ -30,23 +37,27 @@ export default class MyProvider extends Component {
 				? `https://api.themoviedb.org/3/discover/movie?api_key=${process.env.REACT_APP_THEMOVIEDB_API_KEY}&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=${pageNum}`
 				: `https://api.themoviedb.org/3/search/multi?api_key=${process.env.REACT_APP_THEMOVIEDB_API_KEY}&query=${this.state.keyword}&include_adult=false&page=${this.state.pageNum}`;
 		try {
-			const res = await fetch(url);
-			const movies = await res.json();
+			const movies = await fetch(url)
+				.then(data => data.json());
+			let moviesArr = movies.results;
+			moviesArr = lodash.uniqBy(moviesArr, mov => mov.id);
 
 			this.setState({
 				pages: movies,
-				movies: movies.results
+				movies: moviesArr
 			});
+			this.doneLoading();
+			this.windowDoneLoading();
 		} catch (err) {
 			console.log(err);
 		}
 	}
 	fetchPersonCasting = async cIndex => {
+		this.isLoading();
+		const url = `http://api.themoviedb.org/3/person/${window.location.pathname.split('/')[2]}?api_key=${process.env.REACT_APP_THEMOVIEDB_API_KEY}&append_to_response=movie_credits,tv_credits`;
 		try {
-			const res = await fetch(
-				`http://api.themoviedb.org/3/person/${window.location.pathname.split('/')[2]}?api_key=${process.env.REACT_APP_THEMOVIEDB_API_KEY}&append_to_response=movie_credits,tv_credits`
-			);
-			const person = await res.json();
+			const person = await fetch(url)
+				.then(data => data.json());
 			const castMovies = person.movie_credits.cast.map(mov => ({
 				id: mov.id,
 				title: mov.title,
@@ -77,6 +88,8 @@ export default class MyProvider extends Component {
 					casting
 				}
 			});
+			this.doneLoading();
+			this.windowDoneLoading();
 		} catch (err) {
 			console.log(err);
 		}
@@ -86,11 +99,15 @@ export default class MyProvider extends Component {
 			<MyContext.Provider
 				value={{
 					state: this.state,
+					isLoading: this.isLoading,
+					doneLoading: this.doneLoading,
+					windowIsLoading: this.windowIsLoading,
+					windowDoneLoading: this.windowDoneLoading,
 					fetchMovies: this.fetchMovies,
 					fetchPersonCasting: this.fetchPersonCasting,
 					keywordSearch: async () => {
-						this.setState({ pageNum: 1 });
 						const keyword = document.getElementById('search').value;
+						const url = `https://api.themoviedb.org/3/search/multi?api_key=${process.env.REACT_APP_THEMOVIEDB_API_KEY}&query=${keyword}&include_adult=false&page=1`;
 
 						this.setState({
 							pageNum: 1,
@@ -99,14 +116,14 @@ export default class MyProvider extends Component {
 
 						if (keyword !== '') {
 							try {
-								const res = await fetch(
-									`https://api.themoviedb.org/3/search/multi?api_key=${process.env.REACT_APP_THEMOVIEDB_API_KEY}&query=${keyword}&include_adult=false&page=1`
-								);
-								const movies = await res.json();
+								const movies = await fetch(url)
+									.then(data => data.json());
+								let moviesArr = movies.results;
+								moviesArr = lodash.uniqBy(moviesArr, mov => mov.id);
 
 								this.setState({
 									pages: movies,
-									movies: movies.results
+									movies: moviesArr
 								});
 							} catch (err) {
 								console.log(err);
@@ -118,35 +135,38 @@ export default class MyProvider extends Component {
 					handlePageClick: async e => {
 						const pageNum = e.selected + 1;
 						const keyword = document.getElementById('search').value;
+						this.isLoading();
 
 						if (keyword === '') {
+							const url = `https://api.themoviedb.org/3/discover/movie?api_key=${process.env.REACT_APP_THEMOVIEDB_API_KEY}&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=${pageNum}`;
 							try {
-								const res = await fetch(
-									`https://api.themoviedb.org/3/discover/movie?api_key=${process.env.REACT_APP_THEMOVIEDB_API_KEY}&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=${pageNum}`
-								);
-								const movies = await res.json();
+								const movies = await fetch(url)
+									.then(data => data.json());
 
 								this.setState({
 									movies: movies.results,
 									pageNum
 								});
+
+								this.doneLoading();
 							} catch (err) {
 								console.log(err);
 							}
 						} else {
 							const pageNum = e.selected + 1;
+							const url = `https://api.themoviedb.org/3/search/multi?api_key=${process.env.REACT_APP_THEMOVIEDB_API_KEY}&query=${keyword}&include_adult=false&page=${pageNum}`;
 
 							try {
-								const res = await fetch(
-									`https://api.themoviedb.org/3/search/multi?api_key=${process.env.REACT_APP_THEMOVIEDB_API_KEY}&query=${keyword}&include_adult=false&page=${pageNum}`
-								);
-								const movies = await res.json();
+								const movies = await fetch(url)
+									.then(data => data.json());
 
 								this.setState({
 									pages: movies,
 									movies: movies.results,
 									pageNum
 								});
+
+								this.doneLoading();
 							} catch (err) {
 								console.log(err);
 							}

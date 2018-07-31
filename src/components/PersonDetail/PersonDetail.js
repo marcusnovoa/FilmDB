@@ -6,10 +6,15 @@ import './PersonDetail.css';
 
 import Movie from '../Movie/Movie';
 import MoviesListWrapper from '../MoviesListWrapper/MoviesListWrapper';
+import { Spinner, WindowSpinner } from '../Spinner/Spinner';
 
 const PROFILE_PATH = 'https://image.tmdb.org/t/p/w154';
 
 class PersonDetail extends Component {
+  componentWillMount() {
+    this.props.context.windowIsLoading();
+  }
+
   componentDidMount() {
     window.scrollTo(0, 0);
     this.props.context.handlePersonPageClick();
@@ -23,6 +28,8 @@ class PersonDetail extends Component {
     const placeBirth = person.place_of_birth ? person.place_of_birth.includes(' - ') ? person.place_of_birth.replace(/ - /g, ', ') : person.place_of_birth : null;
     return (
       <Fragment>
+        {this.props.context.state.windowLoading ?
+				<WindowSpinner /> : null}
         <div className="PersonInfo">
           <div className="container">
             <div className="row">
@@ -136,10 +143,12 @@ class PersonDetail extends Component {
           </h5> : null
         }
         <MoviesListWrapper>
-          {this.props.context.state.personDetail.casting ?
-            this.props.context.state.personDetail.casting.map(mov =>
-              <Movie key={mov.id} movie={mov} />
-            ) : null
+          {this.props.context.state.isLoading ?
+            <Spinner /> :
+            this.props.context.state.personDetail.casting ?
+              this.props.context.state.personDetail.casting.map(mov =>
+                <Movie key={mov.id} movie={mov} />
+              ) : null
           }
         </MoviesListWrapper>
       </Fragment>

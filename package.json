@@ -1,6 +1,11 @@
 {
   "name": "filmdb",
-  "version": "1.5.0",
+  "author": {
+    "name" : "Marcus Novoa",
+    "email" : "marcus@marcuscodes.com",
+    "url" : "http://marcuscodes.com/"
+  },
+  "version": "2.0.1",
   "private": true,
   "license": "GPL-3.0-only",
   "dependencies": {

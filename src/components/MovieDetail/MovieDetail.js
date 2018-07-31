@@ -8,6 +8,7 @@ import MovieRating from '../MovieRating/MovieRating';
 import CastThumbnail from '../CastThumbnail/CastThumbnail';
 import VideoThumbnail from '../VideoThumbnail/VideoThumbnail';
 import Slider from '../../../node_modules/react-slick/lib/slider';
+import { WindowSpinner } from '../Spinner/Spinner';
 import '../../../node_modules/slick-carousel/slick/slick.css';
 import '../../../node_modules/slick-carousel/slick/slick-theme.css';
 
@@ -21,17 +22,21 @@ class MovieDetail extends Component {
 		videos: []
 	};
 
+	componentWillMount() {
+		this.props.context.windowIsLoading();
+	}
+
 	componentWillUnmount() {
 		this.props.context.closeVideo();
 	}
 
 	async componentDidMount() {
 		window.scrollTo(0, 0);
+		const url = `https://api.themoviedb.org/3/${this.props.match.params.mediaType}/${this.props.match.params.id}?api_key=${process.env.REACT_APP_THEMOVIEDB_API_KEY}&language=en-US&include_adult=false&append_to_response=credits,videos`;
+		
 		try {
-			const res = await fetch(
-				`https://api.themoviedb.org/3/${this.props.match.params.mediaType}/${this.props.match.params.id}?api_key=${process.env.REACT_APP_THEMOVIEDB_API_KEY}&language=en-US&include_adult=false&append_to_response=credits,videos`
-			);
-			const movie = await res.json();
+			const movie = await fetch(url)
+				.then(data => data.json());
 			const castInfo = movie.credits.cast.map(member => ({
 				name: member.name,
 				character: member.character,
@@ -54,6 +59,8 @@ class MovieDetail extends Component {
 					return <CastThumbnail path={image} />;
 				});
 			};
+			this.props.context.doneLoading();
+			this.props.context.windowDoneLoading();
 		} catch (err) {
 			console.log(err);
 		}
@@ -129,6 +136,8 @@ class MovieDetail extends Component {
 
 		return (
 			<Fragment>
+				{this.props.context.state.windowLoading ?
+				<WindowSpinner /> : null}
 				{this.props.context.state.videoPlayer.playVideo ?
 					<div style={{
 						display: 'flex',
