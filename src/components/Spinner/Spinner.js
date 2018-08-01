@@ -1,5 +1,6 @@
 import React from 'react';
 import Navbar from '../Navbar/Navbar';
+import './Spinner.css';
 
 export const WindowSpinner = () => (
   <div style={{
@@ -19,7 +20,10 @@ export const WindowSpinner = () => (
       backgroundColor: '#222',
       color: '#fff'
     }}>
-      <p>Loading...</p>
+      <div className="la-ball-clip-rotate-multiple la-2x">
+        <div />
+        <div />
+      </div>
     </div>
   </div>
 );
@@ -33,6 +37,9 @@ export const Spinner = () => (
     backgroundColor: '#222',
     color: '#fff'
   }}>
-    <p>Loading...</p>
+    <div className="la-ball-clip-rotate-multiple la-2x">
+      <div />
+      <div />
+    </div>
   </div>
 );
