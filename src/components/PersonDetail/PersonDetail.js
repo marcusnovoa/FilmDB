@@ -1,6 +1,7 @@
 import React, { Component, Fragment } from 'react';
 import ReactPaginate from 'react-paginate';
 import moment from 'moment';
+import lodash from 'lodash';
 import './PersonDetail.css';
 
 import Movie from '../Movie/Movie';
@@ -24,7 +25,7 @@ class PersonDetail extends Component {
     const ageBirth = person.birthday ? moment().diff(person.birthday, 'years') : null;
     const deathDay = person.deathday ? moment(person.deathday) : null;
     const ageDeath = person.deathday ? deathDay.diff(person.birthday, 'years') : null;
-    const placeBirth = person.place_of_birth ? person.place_of_birth.includes(' - ') ? person.place_of_birth.replace(/ - /g, ', ') : person.place_of_birth : null;
+    const placeBirth = person.place_of_birth ? lodash.includes(person.place_of_birth, ' - ') ? person.place_of_birth.replace(/ - /g, ', ') : person.place_of_birth : null;
     return (
       <Fragment>
         {this.props.context.state.windowLoading ?
