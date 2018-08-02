@@ -33,7 +33,7 @@ class MovieDetail extends Component {
 	async componentDidMount() {
 		window.scrollTo(0, 0);
 		const url = `https://api.themoviedb.org/3/${this.props.match.params.mediaType}/${this.props.match.params.id}?api_key=${process.env.REACT_APP_THEMOVIEDB_API_KEY}&language=en-US&include_adult=false&append_to_response=credits,videos`;
-		
+
 		try {
 			const movie = await fetch(url)
 				.then(data => data.json());
@@ -179,7 +179,7 @@ class MovieDetail extends Component {
 					<div className="MovieInfo">
 						<div className="container">
 							<div className="row">
-								<div className="col s12 m2" style={{ height: `calc(${this.state.thumbHeight}px + 24.5px)`, position: 'relative' }}>
+								<div className="col s12 m2" style={{ position: 'relative' }}>
 									<div id={`${movie.id}`}>
 										{movie.poster_path ?
 											<img
@@ -199,7 +199,13 @@ class MovieDetail extends Component {
 											</div>
 										}
 									</div>
-									<div id={`${movie.id}-rating`} style={{ width: '154px', position: 'absolute', bottom: 0 }}>
+									<div
+									id={`${movie.id}-rating`}
+									style={{
+										width: '154px',
+										position: 'absolute',
+										marginTop: movie.poster_path ? '-11px' : '-5px'
+									}}>
 										<MovieRating movie={movie}/>
 									</div>
 								</div>
