@@ -12,7 +12,10 @@ const Movie = props => {
 			<div id={`${props.movie.id}`} className="ThumbnailCon">
 				{props.movie.poster_path ?
 					<Link
-						style={{ maxHeight: '231px' }}
+						style={{
+							display: 'flex',
+							maxHeight: '231px'
+						}}
 						to={
 							props.movie.media_type
 								? `/${props.movie.media_type}/${props.movie.id}`
@@ -30,7 +33,10 @@ const Movie = props => {
 					</Link> :
 				props.movie.profile_path ?
 					<Link
-						style={{ maxHeight: '231px' }}
+						style={{
+							display: 'flex',
+							maxHeight: '231px'
+						}}
 						to={
 							props.movie.media_type
 								? `/${props.movie.media_type}/${props.movie.id}`
@@ -47,7 +53,10 @@ const Movie = props => {
 						/>
 					</Link> :
 					<Link
-						style={{ maxHeight: '231px' }}
+						style={{
+							display: 'flex',
+							maxHeight: '231px'
+						}}
 						to={
 							props.movie.media_type
 								? `/${props.movie.media_type}/${props.movie.id}`

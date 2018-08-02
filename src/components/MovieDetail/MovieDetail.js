@@ -18,7 +18,8 @@ class MovieDetail extends Component {
 	state = {
 		movie: {},
 		castInfo: [],
-		videos: []
+		videos: [],
+		thumbHeight: 0
 	};
 
 	componentWillMount() {
@@ -74,6 +75,8 @@ class MovieDetail extends Component {
 			const genreString = genreNames.join(', ');
 			document.getElementById('genres').innerText = `Genres: ${genreString}`;
 		}
+
+		this.setState({ thumbHeight: document.querySelector('.thumbnail').clientHeight });
 	}
 
 	render() {
@@ -176,7 +179,7 @@ class MovieDetail extends Component {
 					<div className="MovieInfo">
 						<div className="container">
 							<div className="row">
-								<div className="col s12 m2" style={{ height: '256px', position: 'relative' }}>
+								<div className="col s12 m2" style={{ height: `calc(${this.state.thumbHeight}px + 24.5px)`, position: 'relative' }}>
 									<div id={`${movie.id}`}>
 										{movie.poster_path ?
 											<img
