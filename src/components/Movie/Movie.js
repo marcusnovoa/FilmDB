@@ -1,6 +1,5 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import Overdrive from 'react-overdrive';
 import './Movie.css';
 
 import MovieRating from '../MovieRating/MovieRating';
@@ -10,9 +9,10 @@ const POSTER_PATH = 'https://image.tmdb.org/t/p/w154';
 const Movie = props => {
 	return (
 		<div className="Movie">
-			<Overdrive id={`${props.movie.id}`} className="ThumbnailCon">
+			<div id={`${props.movie.id}`} className="ThumbnailCon">
 				{props.movie.poster_path ?
 					<Link
+						style={{ maxHeight: '231px' }}
 						to={
 							props.movie.media_type
 								? `/${props.movie.media_type}/${props.movie.id}`
@@ -30,6 +30,7 @@ const Movie = props => {
 					</Link> :
 				props.movie.profile_path ?
 					<Link
+						style={{ maxHeight: '231px' }}
 						to={
 							props.movie.media_type
 								? `/${props.movie.media_type}/${props.movie.id}`
@@ -46,6 +47,7 @@ const Movie = props => {
 						/>
 					</Link> :
 					<Link
+						style={{ maxHeight: '231px' }}
 						to={
 							props.movie.media_type
 								? `/${props.movie.media_type}/${props.movie.id}`
@@ -63,10 +65,10 @@ const Movie = props => {
 						</div>
 					</Link>
 				}
-			</Overdrive>
-			<Overdrive id={`${props.movie.id}-rating`} style={{ width: '100%', position: 'absolute', bottom: '-25px' }}>
+			</div>
+			<div id={`${props.movie.id}-rating`} style={{ width: '100%', position: 'absolute', bottom: props.movie.profile_path ? '-22px' : '-25px' }}>
 				<MovieRating movie={props.movie} />
-			</Overdrive>
+			</div>
 		</div>
 	);
 };

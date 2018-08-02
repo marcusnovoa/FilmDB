@@ -8,8 +8,7 @@
   .Movie .ThumbnailCon {
     display: flex;
     justify-content: center;
-    align-items: center;
-    opacity: 1 !important; }
+    align-items: center; }
   @media screen and (max-width: 1199px) {
     .Movie {
       width: 33.3%; } }

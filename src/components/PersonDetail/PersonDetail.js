@@ -1,5 +1,4 @@
 import React, { Component, Fragment } from 'react';
-import Overdrive from 'react-overdrive';
 import ReactPaginate from 'react-paginate';
 import moment from 'moment';
 import './PersonDetail.css';
@@ -39,7 +38,7 @@ class PersonDetail extends Component {
                   height: '256px',
                   position: 'relative'
                 }}>
-                <Overdrive id={`${person.id}`}>
+                <div id={`${person.id}`}>
                   {person.profile_path ?
                     <img
                       className="card thumbnail"
@@ -57,7 +56,7 @@ class PersonDetail extends Component {
                       <p style={{ margin: '0 .5rem' }}>{person.name}</p>
                     </div>
                   }
-                </Overdrive>
+                </div>
               </div>
               <div className="col bio s12 m10">
                 <div

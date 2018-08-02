@@ -1,5 +1,4 @@
 import React, { Component, Fragment } from 'react';
-import Overdrive from 'react-overdrive';
 import styled from 'styled-components';
 import moment from 'moment';
 import './MovieDetail.css';
@@ -178,7 +177,7 @@ class MovieDetail extends Component {
 						<div className="container">
 							<div className="row">
 								<div className="col s12 m2" style={{ height: '256px', position: 'relative' }}>
-									<Overdrive id={`${movie.id}`}>
+									<div id={`${movie.id}`}>
 										{movie.poster_path ?
 											<img
 												className="card thumbnail"
@@ -196,10 +195,10 @@ class MovieDetail extends Component {
 												<p>{movie.title ? movie.title : movie.name}</p>
 											</div>
 										}
-									</Overdrive>
-									<Overdrive id={`${movie.id}-rating`} style={{ width: '154px', position: 'absolute', bottom: 0 }}>
+									</div>
+									<div id={`${movie.id}-rating`} style={{ width: '154px', position: 'absolute', bottom: 0 }}>
 										<MovieRating movie={movie}/>
-									</Overdrive>
+									</div>
 								</div>
 								<div className="col s12 m10">
 									<div className="card info grey darken-3">
