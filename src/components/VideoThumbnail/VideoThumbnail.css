@@ -1,0 +1,11 @@
+.VideoThumbnail .video-con:hover {
+  cursor: pointer; }
+
+.VideoThumbnail .play-btn {
+  display: none;
+  font-size: 3.5rem;
+  text-shadow: 0 0 10px #000;
+  -webkit-text-shadow: 0 0 10px #000; }
+
+.VideoThumbnail .video-con:hover .play-btn {
+  display: flex; }

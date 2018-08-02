@@ -1,73 +1,291 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import Overdrive from 'react-overdrive';
 import styled from 'styled-components';
+import moment from 'moment';
 import './MovieDetail.css';
+
+import MovieRating from '../MovieRating/MovieRating';
+import CastThumbnail from '../CastThumbnail/CastThumbnail';
+import VideoThumbnail from '../VideoThumbnail/VideoThumbnail';
+import Slider from '../../../node_modules/react-slick/lib/slider';
+import { WindowSpinner } from '../Spinner/Spinner';
+import '../../../node_modules/slick-carousel/slick/slick.css';
+import '../../../node_modules/slick-carousel/slick/slick-theme.css';
 
 const POSTER_PATH = 'https://image.tmdb.org/t/p/w154';
 const BACKDROP_PATH = 'https://image.tmdb.org/t/p/w1280';
 
 class MovieDetail extends Component {
-    state = {
-        movie: {},
-    }
+	state = {
+		movie: {},
+		castInfo: [],
+		videos: []
+	};
 
-    async componentWillMount() {
-        try {
-            const res = await fetch(`https://api.themoviedb.org/3/movie/${this.props.match.params.id}?api_key=${process.env.REACT_APP_THEMOVIEDB_API_KEY}&language=en-US`);
-            const movie = await res.json();
+	componentWillMount() {
+		this.props.context.windowIsLoading();
+	}
 
-            this.setState({
-                movie,
-            });
-        } catch(err) {
-            console.log(err);
-        }
+	componentWillUnmount() {
+		this.props.context.closeVideo();
+	}
 
-        // Retrieve Movie Genres
-        const { movie } = this.state;
-        const genres = Array.from(movie.genres);
-        const genreNames = genres.map(genre => {
-            return genre.name;
-        });
-        const genreString = genreNames.join(', ');
-        document.getElementById('genres').innerText = `Genres: ${genreString}`;
-    }
+	async componentDidMount() {
+		window.scrollTo(0, 0);
+		const url = `https://api.themoviedb.org/3/${this.props.match.params.mediaType}/${this.props.match.params.id}?api_key=${process.env.REACT_APP_THEMOVIEDB_API_KEY}&language=en-US&include_adult=false&append_to_response=credits,videos`;
+		
+		try {
+			const movie = await fetch(url)
+				.then(data => data.json());
+			const castInfo = movie.credits.cast.map(member => ({
+				name: member.name,
+				character: member.character,
+				id: member.id,
+				image: member.profile_path,
+			}));
+			const videos = movie.videos.results.map(vid => ({
+				name: vid.name,
+				path: vid.key
+			}));
 
-    render() {
-        const { movie } = this.state;
-        return (
-            <MovieWrapper className="MovieDetail" backdrop={`${BACKDROP_PATH}${movie.backdrop_path}`}>
-                <div className="MovieInfo">
-                    <div className="container">
-                        <div className="row">
-                            <div className="col s12 m2">
-                                <Overdrive id={`${movie.id}`}>
-                                    <img className="card" src={`${POSTER_PATH}${movie.poster_path}`} alt={movie.title} />
-                                </Overdrive>
-                            </div>
-                            <div className="col s12 m10">
-                                <div className="card info grey darken-3">
-                                    <h4 className="movie-title white-text">{movie.title}</h4>
-                                    <p className="movie-tagline white-text">{movie.tagline}</p>
-                                    <p className="grey-text text-darken-2">Release Date: {movie.release_date}</p>
-                                    <p className="white-text">{movie.overview}</p>
-                                    <p id="genres" className="movie-genres grey-text text-darken-2"></p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </MovieWrapper>
-        );
-    }
+			this.setState({
+				movie,
+				castInfo,
+				videos
+			});
+
+			this.getCastImages = () => {
+				this.state.castImages.map(image => {
+					return <CastThumbnail path={image} />;
+				});
+			};
+			this.props.context.doneLoading();
+			this.props.context.windowDoneLoading();
+		} catch (err) {
+			console.log(err);
+		}
+
+		// Retrieve Movie Genres
+		const { movie } = this.state;
+		if (movie.genres.length > 0) {
+			const genres = Array.from(movie.genres);
+			const genreNames = genres.map(genre => {
+				return genre.name;
+			});
+			const genreString = genreNames.join(', ');
+			document.getElementById('genres').innerText = `Genres: ${genreString}`;
+		}
+	}
+
+	render() {
+		const { movie } = this.state;
+		const castInfoLength = this.state.castInfo.length >= 3 ? 3 : this.state.castInfo.length;
+		const videosLength = this.state.videos.length >= 3 ? 3 : this.state.videos.length;
+		const castSettings = {
+			dots: true,
+			className: 'cast-slider',
+			infinite: true,
+			speed: 500,
+			slidesToShow: castInfoLength,
+			slidesToScroll: castInfoLength,
+			slidesPerRow: this.state.castInfo.length > 5 ? 2 : 1,
+			swipeToSlide: true,
+			responsive: [
+				{
+					breakpoint: 1200,
+					settings: {
+						slidesToShow: this.state.castInfo.length > 1 ? 2 : 1,
+						slidesToScroll: this.state.castInfo.length > 1 ? 2 : 1
+					}
+				},
+				{
+					breakpoint: 768,
+					settings: {
+						slidesToShow: 1,
+						slidesToScroll: 1
+					}
+				}
+			]
+		};
+		const videosSettings = {
+			dots: true,
+			className: 'video-slider',
+			infinite: true,
+			speed: 500,
+			slidesToShow: videosLength,
+			slidesToScroll: videosLength,
+			swipeToSlide: true,
+			responsive: [
+				{
+					breakpoint: 880,
+					settings: {
+						slidesToShow: this.state.videos.length > 1 ? 2 : 1,
+						slidesToScroll: this.state.videos.length > 1 ? 2 : 1
+					}
+				},
+				{
+					breakpoint: 550,
+					settings: {
+						slidesToShow: 1,
+						slidesToScroll: 1
+					}
+				}
+			]
+		};
+		const isIE = !!navigator.userAgent.match(/Trident/g) || !!navigator.userAgent.match(/MSIE/g);
+
+		return (
+			<Fragment>
+				{this.props.context.state.windowLoading ?
+				<WindowSpinner /> : null}
+				{this.props.context.state.videoPlayer.playVideo ?
+					<div style={{
+						display: 'flex',
+						justifyContent: 'center',
+						alignItems: 'center',
+						position: 'fixed',
+						top: 0,
+						width: '100%',
+						height: '100%',
+						backgroundColor: 'rgba(0, 0, 0, 0.6)',
+						zIndex: 999
+					}}
+					onClick={this.props.context.closeVideo}>
+						<div style={{
+							display: 'flex',
+							justifyContent: 'flex-end',
+							width: isIE ? '95%' : '100%',
+							position: 'absolute',
+							top: 0
+						}}>
+							<i
+								className="material-icons white-text"
+								style={{ fontSize: '2rem', margin: '1rem 1rem 0 0', cursor: 'pointer' }}
+								onClick={this.props.context.closeVideo}>
+								close
+							</i>
+						</div>
+						<iframe
+							src={`http://www.youtube.com/embed/${this.props.context.state.videoPlayer.videoPath}?autoplay=1`}
+							width="90%" height="75%" frameBorder="0" title={`videoplayer-${this.props.match.params.id}`} allowFullScreen></iframe>
+					</div> : null
+				}
+				<MovieWrapper
+					className="MovieDetail"
+					backdrop={movie.backdrop_path ? `${BACKDROP_PATH}${movie.backdrop_path}` : null}
+					style={{ paddingTop: movie.backdrop_path ? '50vh' : '6rem' }}>
+					<div className="MovieInfo">
+						<div className="container">
+							<div className="row">
+								<div className="col s12 m2" style={{ height: '256px', position: 'relative' }}>
+									<Overdrive id={`${movie.id}`}>
+										{movie.poster_path ?
+											<img
+												className="card thumbnail"
+												src={`${POSTER_PATH}${movie.poster_path}`}
+												alt={movie.title ? `${movie.title}` : `${movie.name}`}
+											/> :
+											<div className="card thumbnail grey darken-3 white-text"
+												style={{
+													width: '154px',
+													height: '231px',
+													display: 'flex',
+													textAlign: 'center',
+													justifyContent: 'center',
+													alignItems: 'center' }}>
+												<p>{movie.title ? movie.title : movie.name}</p>
+											</div>
+										}
+									</Overdrive>
+									<Overdrive id={`${movie.id}-rating`} style={{ width: '154px', position: 'absolute', bottom: 0 }}>
+										<MovieRating movie={movie}/>
+									</Overdrive>
+								</div>
+								<div className="col s12 m10">
+									<div className="card info grey darken-3">
+										<h4 className="movie-title white-text">
+											{movie.title ? movie.title : movie.name}
+										</h4>
+										{movie.tagline ?
+											<p className="movie-tagline white-text">{movie.tagline}</p> : null
+										}
+										{movie.release_date || movie.first_air_date ?
+											<p
+												className="grey-text text-darken-2"
+												style={{
+													marginBottom: movie.overview || movie.genres.length > 0 ? '15px' : 0
+												}}>
+													Release Date:{' '}
+													{movie.release_date
+														? moment(movie.release_date).format('LL')
+														: moment(movie.first_air_date).format('LL')}
+											</p> : null
+										}
+										{movie.overview ?
+											<p className="white-text">{movie.overview}</p> : null
+										}
+										{movie.genres ?
+											<p
+												id="genres"
+												className="movie-genres grey-text text-darken-2"
+												style={{ marginTop: movie.genres.length > 0 ? '15px' : 0 }}
+											/> : null
+										}
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</MovieWrapper>
+				{this.state.castInfo.length > 0 ?
+					<div className="MovieCast container">
+						<div className="row slider-row">
+							<div className="col s12">
+								<h5 className="slider-title">
+									Cast List
+								</h5>
+								<Slider {...castSettings}>
+									{this.state.castInfo.map(member => (
+										<CastThumbnail
+											key={member.image}
+											name={member.name}
+											character={member.character}
+											path={member.image}
+											id={member.id}
+										/>
+									))}
+								</Slider>
+							</div>
+						</div>
+					</div> : null
+				}
+				{this.state.videos.length > 0 ?
+					<div className="VideosList container">
+						<div className="row slider-row">
+							<div className="col s12">
+								<h5 className="slider-title">
+									Videos
+								</h5>
+								<Slider {...videosSettings}>
+									{this.state.videos.map(vid => (
+										<VideoThumbnail key={vid.path} name={vid.name} url={vid.path} play={this.props.context.openVideo} />
+									))}
+								</Slider>
+							</div>
+						</div>
+					</div> : null
+				}
+			</Fragment>
+		);
+	}
 }
 
 const MovieWrapper = styled.div`
-    position: relative;
-    padding-top: 50vh;
-    background: url(${props => props.backdrop}) no-repeat;
-    background-size: cover;
-    background-position: center;
+	position: relative;
+	background: url(${props => props.backdrop}) no-repeat;
+	background-size: cover;
+	background-position: center;
+	background-attachment: fixed;
 `;
 
 export default MovieDetail;

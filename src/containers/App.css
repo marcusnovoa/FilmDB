@@ -8,7 +8,45 @@
 .App .card {
   margin: 0;
   box-shadow: 0 0 35px #000;
-  -webkit-box-shadow: 0 0 35px #000; }
+  -webkit-box-shadow: 0 0 35px #000;
+  border-radius: .3rem; }
 
 .App .row.inner {
   margin: 0; }
+
+.App .slick-dots {
+  position: initial; }
+
+.App .slick-dots li button:before {
+  font-size: 8px; }
+
+.App .slick-prev:before,
+.App .slick-next:before {
+  opacity: 1;
+  color: #616161; }
+
+.App .slick-dots li.slick-active button:before {
+  opacity: 1;
+  color: white; }
+
+.App .slick-dots li button:before {
+  color: white; }
+
+.pagination li a {
+  color: #9e9e9e; }
+
+.pagination li.active a {
+  color: #111; }
+
+.pagination li:hover {
+  cursor: pointer; }
+
+.pagination li.active {
+  background-color: #fff; }
+
+*:focus {
+  outline: 0; }
+
+@media only screen and (max-width: 992px) {
+  .pagination {
+    width: auto; } }

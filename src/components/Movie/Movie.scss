@@ -1,15 +1,23 @@
 .Movie {
-    width: 20%;
-    display: flex;
-    justify-content: center;
-    margin: .5rem 0 1rem 0;
-    @media screen and (max-width: 1199px) {
-        width: 33.3%;
-    }
-    @media screen and (max-width: 768px) {
-        width: 50%;
-    }
-    @media screen and (max-width: 540px) {
-        width: 100%;
-    }
+	width: 20%;
+	display: flex;
+	position: relative;
+	flex-direction: column;
+	justify-content: flex-start !important;
+	margin-bottom: 3rem;
+	.ThumbnailCon {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		opacity: 1 !important;
+	}
+	@media screen and (max-width: 1199px) {
+		width: 33.3%;
+	}
+	@media screen and (max-width: 768px) {
+		width: 50%;
+	}
+	@media screen and (max-width: 540px) {
+		width: 100%;
+	}
 }

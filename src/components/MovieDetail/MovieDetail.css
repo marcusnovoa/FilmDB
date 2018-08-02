@@ -1,24 +1,25 @@
 .MovieDetail .card {
   margin: 0; }
   .MovieDetail .card.info {
-    margin-top: -5rem;
     padding: 2rem;
     width: 100%; }
 
 .MovieDetail .MovieInfo {
-  min-height: calc(35vh - 64px);
+  margin-bottom: 3rem;
   background: #222;
   position: relative;
   text-align: left;
-  padding: 2rem 10%;
   display: flex; }
   .MovieDetail .MovieInfo img {
-    position: relative;
-    top: -5rem; }
-  @media screen and (min-width: 601px) {
-    .MovieDetail .MovieInfo .row {
-      display: flex;
-      justify-content: space-between; } }
+    position: relative; }
+  .MovieDetail .MovieInfo .container {
+    margin-top: -2rem; }
+    .MovieDetail .MovieInfo .container .row {
+      margin-bottom: 0; }
+      @media screen and (min-width: 601px) {
+        .MovieDetail .MovieInfo .container .row {
+          display: flex;
+          justify-content: space-between; } }
 
 .MovieDetail .movie-title {
   margin: 0; }
@@ -44,3 +45,20 @@
 @media screen and (min-width: 601px) and (max-width: 1800px) {
   .MovieDetail .col.m10 {
     margin-left: 1rem; } }
+
+.cast-slider .slick-track {
+  padding-top: 2rem; }
+
+.video-slider .slick-track {
+  padding: 2rem 0; }
+
+.slider-title {
+  color: #fff;
+  text-align: center;
+  margin: 1rem 0 0 0; }
+
+.row.slider-row {
+  margin-bottom: 3rem; }
+
+.pagination {
+  margin: 0; }

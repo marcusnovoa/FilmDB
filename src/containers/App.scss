@@ -1,18 +1,61 @@
 .App {
-    .Navbar {
-        @media screen and (min-width: 993px) {
-            padding-left: 15px;
-        }
-    }
-    .button-collapse {
-        cursor: pointer;
-    }
-    .card {
-        margin: 0;
-        box-shadow: 0 0 35px #000;
-        -webkit-box-shadow: 0 0 35px #000;
-    }
-    .row.inner {
-        margin: 0;
-    }
+	.Navbar {
+		@media screen and (min-width: 993px) {
+			padding-left: 15px;
+		}
+	}
+	.button-collapse {
+		cursor: pointer;
+	}
+	.card {
+		margin: 0;
+		box-shadow: 0 0 35px #000;
+		-webkit-box-shadow: 0 0 35px #000;
+		border-radius: .3rem;
+	}
+	.row.inner {
+		margin: 0;
+	}
+
+	// React Slick - Slider (MovieDetail)
+	.slick-dots {
+		position: initial;
+	}
+	.slick-dots li button:before {
+		font-size: 8px;
+	}
+	.slick-prev:before,
+	.slick-next:before {
+		opacity: 1;
+		color: #616161;
+	}
+	.slick-dots li.slick-active button:before {
+		opacity: 1;
+		color: white;
+	}
+	.slick-dots li button:before {
+		color: white;
+	}
+}
+
+// ***** Pagination ***** //
+.pagination li a {
+	color: #9e9e9e;
+}
+.pagination li.active a {
+	color: #111;
+}
+.pagination li:hover {
+	cursor: pointer;
+}
+.pagination li.active {
+	background-color: #fff;
+}
+*:focus {
+	outline: 0;
+}
+@media only screen and (max-width: 992px) {
+	.pagination {
+		width: auto;
+	}
 }
