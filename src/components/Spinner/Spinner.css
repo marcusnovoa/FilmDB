@@ -172,3 +172,44 @@
             transform: translate(-50%, -50%) rotate(360deg);
   }
 }
+
+/*
+* Custom Loader Styles - Marcus Novoa
+*/
+.window-spinner-con {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #222;
+  color: #fff;
+}
+.movies-spinner-con {
+  width: 100%;
+  height: 1128px;
+  display: flex;
+  justify-content: center;
+  background-color: #222;
+  color: #fff;
+}
+@media screen and (max-width: 1999px) {
+  .movies-spinner-con {
+    height: 1963.500px;
+  }
+}
+@media screen and (max-width: 991px) {
+  .movies-spinner-con {
+    height: 1953px;
+  }
+}
+@media screen and (max-width: 768px) {
+  .movies-spinner-con {
+    height: 2790px;
+  }
+}
+@media screen and (max-width: 540px) {
+  .movies-spinner-con {
+    height: 5563px;
+  }
+}

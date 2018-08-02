@@ -11,15 +11,7 @@ export const WindowSpinner = () => (
     zIndex: 100
   }}>
     <Navbar />
-    <div style={{
-      width: '100%',
-      height: '100%',
-      display: 'flex',
-      justifyContent: 'center',
-      alignItems: 'center',
-      backgroundColor: '#222',
-      color: '#fff'
-    }}>
+    <div className="window-spinner-con">
       <div className="la-ball-clip-rotate-multiple la-2x">
         <div />
         <div />
@@ -29,14 +21,7 @@ export const WindowSpinner = () => (
 );
 
 export const Spinner = () => (
-  <div style={{
-    width: '100%',
-    height: '1128px',
-    display: 'flex',
-    justifyContent: 'center',
-    backgroundColor: '#222',
-    color: '#fff'
-  }}>
+  <div className="movies-spinner-con">
     <div className="la-ball-clip-rotate-multiple la-2x">
       <div />
       <div />
