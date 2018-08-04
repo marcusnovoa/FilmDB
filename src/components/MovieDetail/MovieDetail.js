@@ -1,6 +1,7 @@
 import React, { Component, Fragment } from 'react';
 import styled from 'styled-components';
 import moment from 'moment';
+import PropTypes from 'prop-types';
 import './MovieDetail.css';
 
 import MovieRating from '../MovieRating/MovieRating';
@@ -23,16 +24,20 @@ class MovieDetail extends Component {
 	};
 
 	componentWillMount() {
-		this.props.context.windowIsLoading();
+		const { windowIsLoading } = this.props.context;
+		windowIsLoading();
 	}
 
 	componentWillUnmount() {
-		this.props.context.closeVideo();
+		const { closeVideo } = this.props.context;
+		closeVideo();
 	}
 
 	async componentDidMount() {
 		window.scrollTo(0, 0);
-		const url = `https://api.themoviedb.org/3/${this.props.match.params.mediaType}/${this.props.match.params.id}?api_key=${process.env.REACT_APP_THEMOVIEDB_API_KEY}&language=en-US&include_adult=false&append_to_response=credits,videos`;
+		const { context, match } = this.props;
+		const { castImages } = this.state;
+		const url = `https://api.themoviedb.org/3/${match.params.mediaType}/${match.params.id}?api_key=${process.env.REACT_APP_THEMOVIEDB_API_KEY}&language=en-US&include_adult=false&append_to_response=credits,videos`;
 
 		try {
 			const movie = await fetch(url)
@@ -55,12 +60,12 @@ class MovieDetail extends Component {
 			});
 
 			this.getCastImages = () => {
-				this.state.castImages.map(image => {
+				castImages.map(image => {
 					return <CastThumbnail path={image} />;
 				});
 			};
-			this.props.context.doneLoading();
-			this.props.context.windowDoneLoading();
+			context.doneLoading();
+			context.windowDoneLoading();
 		} catch (err) {
 			console.log(err);
 		}
@@ -80,9 +85,10 @@ class MovieDetail extends Component {
 	}
 
 	render() {
-		const { movie } = this.state;
-		const castInfoLength = this.state.castInfo.length >= 3 ? 3 : this.state.castInfo.length;
-		const videosLength = this.state.videos.length >= 3 ? 3 : this.state.videos.length;
+		const { castInfo, movie, videos } = this.state;
+		const { context, match } = this.props;
+		const castInfoLength = castInfo.length >= 3 ? 3 : castInfo.length;
+		const videosLength = videos.length >= 3 ? 3 : videos.length;
 		const castSettings = {
 			dots: true,
 			className: 'cast-slider',
@@ -90,14 +96,14 @@ class MovieDetail extends Component {
 			speed: 500,
 			slidesToShow: castInfoLength,
 			slidesToScroll: castInfoLength,
-			slidesPerRow: this.state.castInfo.length > 5 ? 2 : 1,
+			slidesPerRow: castInfo.length > 5 ? 2 : 1,
 			swipeToSlide: true,
 			responsive: [
 				{
 					breakpoint: 1200,
 					settings: {
-						slidesToShow: this.state.castInfo.length > 1 ? 2 : 1,
-						slidesToScroll: this.state.castInfo.length > 1 ? 2 : 1
+						slidesToShow: castInfo.length > 1 ? 2 : 1,
+						slidesToScroll: castInfo.length > 1 ? 2 : 1
 					}
 				},
 				{
@@ -121,8 +127,8 @@ class MovieDetail extends Component {
 				{
 					breakpoint: 880,
 					settings: {
-						slidesToShow: this.state.videos.length > 1 ? 2 : 1,
-						slidesToScroll: this.state.videos.length > 1 ? 2 : 1
+						slidesToShow: videos.length > 1 ? 2 : 1,
+						slidesToScroll: videos.length > 1 ? 2 : 1
 					}
 				},
 				{
@@ -138,9 +144,9 @@ class MovieDetail extends Component {
 
 		return (
 			<Fragment>
-				{this.props.context.state.windowLoading ?
-				<WindowSpinner /> : null}
-				{this.props.context.state.videoPlayer.playVideo ?
+				{context.state.windowLoading ?
+					<WindowSpinner /> : null}
+				{context.state.videoPlayer.playVideo ?
 					<div style={{
 						display: 'flex',
 						justifyContent: 'center',
@@ -152,7 +158,7 @@ class MovieDetail extends Component {
 						backgroundColor: 'rgba(0, 0, 0, 0.6)',
 						zIndex: 999
 					}}
-					onClick={this.props.context.closeVideo}>
+						onClick={context.closeVideo}>
 						<div style={{
 							display: 'flex',
 							justifyContent: 'flex-end',
@@ -163,13 +169,13 @@ class MovieDetail extends Component {
 							<i
 								className="material-icons white-text"
 								style={{ fontSize: '2rem', margin: '1rem 1rem 0 0', cursor: 'pointer' }}
-								onClick={this.props.context.closeVideo}>
+								onClick={context.closeVideo}>
 								close
 							</i>
 						</div>
 						<iframe
-							src={`http://www.youtube.com/embed/${this.props.context.state.videoPlayer.videoPath}?autoplay=1`}
-							width="90%" height="75%" frameBorder="0" title={`videoplayer-${this.props.match.params.id}`} allowFullScreen></iframe>
+							src={`http://www.youtube.com/embed/${context.state.videoPlayer.videoPath}?autoplay=1`}
+							width="90%" height="75%" frameBorder="0" title={`videoplayer-${match.params.id}`} allowFullScreen></iframe>
 					</div> : null
 				}
 				<MovieWrapper
@@ -194,19 +200,20 @@ class MovieDetail extends Component {
 													display: 'flex',
 													textAlign: 'center',
 													justifyContent: 'center',
-													alignItems: 'center' }}>
+													alignItems: 'center'
+												}}>
 												<p>{movie.title ? movie.title : movie.name}</p>
 											</div>
 										}
 									</div>
 									<div
-									id={`${movie.id}-rating`}
-									style={{
-										width: '154px',
-										position: 'absolute',
-										marginTop: movie.poster_path ? '-11px' : '-5px'
-									}}>
-										<MovieRating movie={movie}/>
+										id={`${movie.id}-rating`}
+										style={{
+											width: '154px',
+											position: 'absolute',
+											marginTop: movie.poster_path ? '-11px' : '-5px'
+										}}>
+										<MovieRating movie={movie} />
 									</div>
 								</div>
 								<div className="col s12 m10">
@@ -223,10 +230,10 @@ class MovieDetail extends Component {
 												style={{
 													marginBottom: movie.overview || movie.genres.length > 0 ? '15px' : 0
 												}}>
-													Release Date:{' '}
-													{movie.release_date
-														? moment(movie.release_date).format('LL')
-														: moment(movie.first_air_date).format('LL')}
+												Release Date:{' '}
+												{movie.release_date
+													? moment(movie.release_date).format('LL')
+													: moment(movie.first_air_date).format('LL')}
 											</p> : null
 										}
 										{movie.overview ?
@@ -245,7 +252,7 @@ class MovieDetail extends Component {
 						</div>
 					</div>
 				</MovieWrapper>
-				{this.state.castInfo.length > 0 ?
+				{castInfo.length > 0 ?
 					<div className="MovieCast container">
 						<div className="row slider-row">
 							<div className="col s12">
@@ -253,13 +260,10 @@ class MovieDetail extends Component {
 									Cast List
 								</h5>
 								<Slider {...castSettings}>
-									{this.state.castInfo.map(member => (
+									{castInfo.map(member => (
 										<CastThumbnail
 											key={member.image}
-											name={member.name}
-											character={member.character}
-											path={member.image}
-											id={member.id}
+											member={member}
 										/>
 									))}
 								</Slider>
@@ -267,7 +271,7 @@ class MovieDetail extends Component {
 						</div>
 					</div> : null
 				}
-				{this.state.videos.length > 0 ?
+				{videos.length > 0 ?
 					<div className="VideosList container">
 						<div className="row slider-row">
 							<div className="col s12">
@@ -275,8 +279,8 @@ class MovieDetail extends Component {
 									Videos
 								</h5>
 								<Slider {...videosSettings}>
-									{this.state.videos.map(vid => (
-										<VideoThumbnail key={vid.path} name={vid.name} url={vid.path} play={this.props.context.openVideo} />
+									{videos.map(vid => (
+										<VideoThumbnail key={vid.path} name={vid.name} url={vid.path} play={context.openVideo} />
 									))}
 								</Slider>
 							</div>
@@ -286,6 +290,10 @@ class MovieDetail extends Component {
 			</Fragment>
 		);
 	}
+}
+
+MovieDetail.propTypes = {
+	context: PropTypes.object.isRequired
 }
 
 const MovieWrapper = styled.div`

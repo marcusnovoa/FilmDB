@@ -1,6 +1,7 @@
 import React, { Component, Fragment } from 'react';
 import './MoviesList.css';
 import ReactPaginate from 'react-paginate';
+import PropTypes from 'prop-types'
 
 import Movie from '../Movie/Movie';
 import { Spinner, WindowSpinner } from '../Spinner/Spinner';
@@ -8,22 +9,27 @@ import MoviesListWrapper from '../MoviesListWrapper/MoviesListWrapper';
 
 class MoviesList extends Component {
 	componentWillMount() {
-		this.props.context.windowIsLoading();
+		const { windowIsLoading } = this.props.context;
+		windowIsLoading();
 	}
 
 	componentDidMount() {
-		this.props.context.fetchMovies();
+		const { fetchMovies } = this.props.context;
+		const { keyword } = this.props.context.state;
+		fetchMovies();
 
-		if (this.props.context.state.keyword !== '') {
+		if (keyword !== '') {
 			document.getElementById('search-label').classList.add('active');
 		}
 	}
 
 	render() {
+		const { context } = this.props;
+		const { state } = this.props.context;
 		return (
 			<Fragment>
-				{this.props.context.state.windowLoading ?
-				<WindowSpinner /> : null}
+				{state.windowLoading ?
+					<WindowSpinner /> : null}
 				<div className="MoviesList">
 					<div className="container title">
 						<div className="row">
@@ -43,8 +49,8 @@ class MoviesList extends Component {
 										id="search"
 										type="text"
 										className="search-input"
-										onChange={this.props.context.keywordSearch}
-										value={this.props.context.state.keyword}
+										onChange={context.keywordSearch}
+										value={state.keyword}
 									/>
 									<label
 										id="search-label"
@@ -70,27 +76,31 @@ class MoviesList extends Component {
 							activeClassName={'active'}
 							breakLabel={<a href="">...</a>}
 							breakClassName={'break-me'}
-							initialPage={this.props.context.state.pageNum - 1}
-							forcePage={this.props.context.state.pageNum - 1}
+							initialPage={state.pageNum - 1}
+							forcePage={state.pageNum - 1}
 							previousLabel={'Prev'}
 							nextLabel={'Next'}
-							pageCount={this.props.context.state.pages.total_pages}
+							pageCount={state.pages.total_pages}
 							marginPagesDisplayed={0}
 							pageRangeDisplayed={7}
-							onPageChange={this.props.context.handlePageClick}
+							onPageChange={context.handlePageClick}
 							containerClassName={'pagination'}
 							subContainerClassName={'pages pagination'}
 						/>
 					</div>
 					<MoviesListWrapper>
-						{this.props.context.state.isLoading ?
+						{state.isLoading ?
 							<Spinner /> :
-							this.props.context.state.movies.map(movie => <Movie key={movie.id} movie={movie} /> )};
+							state.movies.map(movie => <Movie key={movie.id} movie={movie} />)};
 					</MoviesListWrapper>
 				</div>
 			</Fragment>
 		);
 	}
+}
+
+MoviesList.propTypes = {
+	context: PropTypes.object.isRequired
 }
 
 export default MoviesList;
