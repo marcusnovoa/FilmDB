@@ -35,7 +35,7 @@
 
 @media screen and (max-width: 600px) {
   .MovieDetail .col.m2 {
-    margin-bottom: 2rem; } }
+    margin-bottom: 3rem; } }
 
 @media screen and (min-width: 601px) {
   .MovieDetail .col.m2 {
@@ -62,3 +62,8 @@
 
 .pagination {
   margin: 0; }
+
+@media screen and (max-width: 600px) {
+  .rating-wrapper {
+    bottom: -19px;
+    z-index: 1; } }

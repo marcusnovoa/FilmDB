@@ -44,7 +44,7 @@
 		}
 		&.m2 {
 			@media screen and (max-width: 600px) {
-				margin-bottom: 2rem;
+				margin-bottom: 3rem;
 			}
 			@media screen and (min-width: 601px) {
 				margin-left: 0;
@@ -78,4 +78,10 @@
 }
 .pagination {
 	margin: 0;
+}
+.rating-wrapper {
+	@media screen and (max-width: 600px) {
+		bottom: -19px;
+		z-index: 1;
+	}
 }

@@ -208,6 +208,7 @@ class MovieDetail extends Component {
 									</div>
 									<div
 										id={`${movie.id}-rating`}
+										className="rating-wrapper"
 										style={{
 											width: '154px',
 											position: 'absolute',

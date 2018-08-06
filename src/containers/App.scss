@@ -1,4 +1,7 @@
 .App {
+	@media screen and (max-width: 600px) {
+		overflow-x: hidden;
+	}
 	.Navbar {
 		@media screen and (min-width: 993px) {
 			padding-left: 15px;
