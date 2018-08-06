@@ -54,7 +54,7 @@ export default class MyProvider extends Component {
 	}
 	fetchPersonCasting = async cIndex => {
 		this.isLoading();
-		const url = `http://api.themoviedb.org/3/person/${window.location.pathname.split('/')[2]}?api_key=${process.env.REACT_APP_THEMOVIEDB_API_KEY}&append_to_response=movie_credits,tv_credits`;
+		const url = `https://api.themoviedb.org/3/person/${window.location.pathname.split('/')[2]}?api_key=${process.env.REACT_APP_THEMOVIEDB_API_KEY}&append_to_response=movie_credits,tv_credits`;
 		try {
 			const person = await fetch(url)
 				.then(data => data.json());
@@ -75,7 +75,7 @@ export default class MyProvider extends Component {
 				media_type: 'tv'
 			}));
 			let castingFull = castMovies.concat(castShows)
-				.sort(function(a,b) {return (a.release_date < b.release_date) ? 1 : ((b.release_date < a.release_date) ? -1 : 0)});
+				.sort(function (a, b) { return (a.release_date < b.release_date) ? 1 : ((b.release_date < a.release_date) ? -1 : 0) });
 			castingFull = lodash.uniqBy(castingFull, cast => cast.id);
 			const castingChunked = lodash.chunk(castingFull, 20);
 			const casting = castingChunked[cIndex];
@@ -176,11 +176,11 @@ export default class MyProvider extends Component {
 						}
 					},
 					handlePersonPageClick: e => {
-						const castingIndex =  e ?
-																		e.selected :
-																	this.state.personDetail.castingIndex ?
-																 		this.state.personDetail.castingIndex :
-																	0;
+						const castingIndex = e ?
+							e.selected :
+							this.state.personDetail.castingIndex ?
+								this.state.personDetail.castingIndex :
+								0;
 						let lastId = window.location.pathname.split('/')[2];
 						if (this.state.personDetail.lastId === '') {
 							this.setState({

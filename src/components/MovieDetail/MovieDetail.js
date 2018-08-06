@@ -174,7 +174,7 @@ class MovieDetail extends Component {
 							</i>
 						</div>
 						<iframe
-							src={`http://www.youtube.com/embed/${context.state.videoPlayer.videoPath}?autoplay=1`}
+							src={`https://www.youtube.com/embed/${context.state.videoPlayer.videoPath}?autoplay=1`}
 							width="90%" height="75%" frameBorder="0" title={`videoplayer-${match.params.id}`} allowFullScreen></iframe>
 					</div> : null
 				}
