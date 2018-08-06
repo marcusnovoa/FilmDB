@@ -7,7 +7,7 @@ const myMoviesList = props => {
   return (
     <MyContext.Consumer>
       {context =>
-        <MoviesList context={ context } {...props} />
+        <MoviesList context={context} {...props} />
       }
     </MyContext.Consumer>
   );

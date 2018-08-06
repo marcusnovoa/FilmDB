@@ -1,24 +1,24 @@
 .About {
-    min-height: 75vh;
-    margin-top: 3rem;
-    a {
-        color: #616161;
-        transition: color 200ms ease;
-        &:hover {
-            color: #fff !important;
+  min-height: 75vh;
+  margin-top: 3rem;
+  a {
+    color: #616161;
+    transition: color 200ms ease;
+    &:hover {
+      color: #fff !important;
+    }
+  }
+  .about-title {
+    margin-bottom: 2rem;
+  }
+  .row {
+    margin-bottom: 0;
+    &.info {
+      p {
+        &:first-child {
+          margin-top: 0;
         }
+      }
     }
-    .about-title {
-        margin-bottom: 2rem;
-    }
-    .row {
-        margin-bottom: 0;
-        &.info {
-            p {
-                &:first-child {
-                    margin-top: 0;
-                }
-            }
-        }
-    }
+  }
 }

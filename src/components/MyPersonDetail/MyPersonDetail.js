@@ -7,7 +7,7 @@ const myPersonDetail = props => {
   return (
     <MyContext.Consumer>
       {context =>
-        <PersonDetail context={ context } {...props} />
+        <PersonDetail context={context} {...props} />
       }
     </MyContext.Consumer>
   );
