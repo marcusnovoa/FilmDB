@@ -54,7 +54,7 @@ export default class MyProvider extends Component {
 	}
 	fetchPersonCasting = async cIndex => {
 		this.isLoading();
-		const url = `https://api.themoviedb.org/3/person/${window.location.pathname.split('/')[2]}?api_key=${process.env.REACT_APP_THEMOVIEDB_API_KEY}&append_to_response=movie_credits,tv_credits`;
+		const url = `https://api.themoviedb.org/3/person/${window.location.pathname.split('/')[3]}?api_key=${process.env.REACT_APP_THEMOVIEDB_API_KEY}&append_to_response=movie_credits,tv_credits`;
 		try {
 			const person = await fetch(url)
 				.then(data => data.json());
@@ -181,7 +181,7 @@ export default class MyProvider extends Component {
 							this.state.personDetail.castingIndex ?
 								this.state.personDetail.castingIndex :
 								0;
-						let lastId = window.location.pathname.split('/')[2];
+						let lastId = window.location.pathname.split('/')[3];
 						if (this.state.personDetail.lastId === '') {
 							this.setState({
 								personDetail: {
@@ -201,7 +201,7 @@ export default class MyProvider extends Component {
 								});
 								this.fetchPersonCasting(castingIndex);
 							} else {
-								lastId = window.location.pathname.split('/')[2];
+								lastId = window.location.pathname.split('/')[3];
 								this.setState({
 									personDetail: {
 										...this.state.personDetail,

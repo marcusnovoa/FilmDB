@@ -12,7 +12,7 @@ import MyProvider from '../context';
 
 const App = () => (
 	<MyProvider>
-		<Router>
+		<Router basename="FilmDB">
 			<div className="App">
 				<Navbar />
 				<Switch>
