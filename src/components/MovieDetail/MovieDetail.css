@@ -65,5 +65,7 @@
 
 @media screen and (max-width: 600px) {
   .rating-wrapper {
+    left: 0;
+    width: 100% !important;
     bottom: -19px;
     z-index: 1; } }
