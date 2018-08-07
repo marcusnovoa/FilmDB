@@ -58,7 +58,7 @@ class MoviesList extends Component {
                     data-error="wrong"
                     data-success="right"
                   >
-                    Search for Movies and TV Shows...
+                    Search for movies, shows, and stars...
 									</label>
                 </div>
               </div>

@@ -14,15 +14,21 @@ const About = () => (
           <p className="white-text">
             FilmDB is a web-app built using ReactJS for the front-end that fetches movie data from
             The Movie Database (TMDb) API using the Async/Await features from JavaScript ES7.
-                    </p>
+          </p>
           <p className="white-text">
             FilmDB was designed by LevelUpTuts as "LUTDB" and provided as a short-list of
             online tutorials. This version was built from beginning to end by Marcus Novoa and has
-            been modified from the one created by LevelUpTuts. My changes include:
-                    </p>
+            been modified from the one created by LevelUpTuts.
+          </p>
+          <p className="white-text">My changes include:</p>
           <ul>
             <li><p className="white-text">- Adding content and styling changes to the UI.</p></li>
-            <li><p className="white-text">- Implementing a search bar for movie searches utilizing the state.</p></li>
+            <li><p className="white-text">- Enabling global state using React's Context API.</p></li>
+            <li><p className="white-text">- Implementing a search bar for various searches utilizing the state.</p></li>
+            <li><p className="white-text">- The addition of TV show and cast member search capabilities.</p></li>
+            <li><p className="white-text">- Cast lists and videos available in movie details.</p></li>
+            <li><p className="white-text">- Personal pages for cast members with lists of casting roles.</p></li>
+            <li><p className="white-text">- Pagination</p></li>
             <li><p className="white-text">- Materialize CSS</p></li>
             <li><p className="white-text">- SCSS</p></li>
           </ul>

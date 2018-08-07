@@ -1,6 +1,9 @@
 import React from 'react';
 import './Footer.css';
 
+const date = new Date();
+const fullYear = date.getFullYear();
+
 const Footer = () => {
   return (
     <div className="Footer">
@@ -24,7 +27,7 @@ const Footer = () => {
         </div>
         <div className="footer-copyright">
           <div className="container white-text">
-            © 2018 FilmDB developed by Marcus Novoa
+            © {fullYear} FilmDB developed by Marcus Novoa
           </div>
         </div>
       </footer>
