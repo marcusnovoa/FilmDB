@@ -1,0 +1,35 @@
+.PersonInfo {
+  margin-top: 4rem;
+  position: relative;
+  display: flex;
+  img {
+    position: relative;
+  }
+  .container {
+    .row {
+      margin-bottom: 0;
+      display: flex;
+      @media screen and (max-width: 600px) {
+        flex-direction: column;
+      }
+      .col {
+        &.profile {
+          @media screen and (max-width: 600px) {
+            text-align: center;
+          }
+          @media screen and (min-width: 601px) {
+            width: auto;
+          }
+        }
+        &.bio {
+          @media screen and (min-width: 601px) {
+            margin-left: 1rem;
+          }
+        }
+      }
+    }
+  }
+}
+.pagination {
+  margin: 0;
+}
