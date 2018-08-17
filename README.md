@@ -1,5 +1,5 @@
 ## FilmDB Web-App: The MovieDB (TMDb) API  
 Originally designed by LevelUpTuts. Developed and modified by Marcus Novoa  
-Live Demo: https://sheltered-reaches-84373.herokuapp.com/  
+My additions include: React Context API, UI changes, custom components, and much more.
   
 This project was bootstrapped with Create React App.
